@@ -11,7 +11,7 @@
 # else:
 #     print("data is a collection")
 
-# Q: 
+# Q:
 # char=input("enter a character here: ")
 # if 'A'<=char<='Z':
 #     print(ord(char))
@@ -128,14 +128,14 @@
 
 #Q: single/double/triple/more digit for a number
 # num=int(input("enter a number: "))
-# if len(str(num))==1:
-#     print("single digit number")
-# elif len(str(num))==2:
-#     print("double digit number")
-# elif len(str(num))==3:
-#     print("triple digit number")
+# if -9<=num<=9:
+#     print("single digit")
+# elif -99<=num<=99:
+#     print("double digit")
+# elif -999<=num<=999:
+#     print("triple digit")
 # else:
-#     print("larger than 3 digits")
+#     print("larger than 4 digits")
 
 #Q: middle value of tuple is int or not
 # data=(10,5,50,3+3j,'hello')
@@ -146,5 +146,47 @@
 #     print("it is not an integer")
 
 #Q: relation between two integers
-num=int(input("enter a number: "))
-num2=int(input("enter another number: "))
+# num=int(input("enter a number: "))
+# num2=int(input("enter another number: "))
+# if num == num2:
+#     print("both are equal")
+# if num>num2:
+#     print("first number is greater than second")
+# else:
+#     print("second number is greater")
+
+#Q: nested if last item collection/not
+# data=[10,10.5,True,'apple']
+# if type(data[-1])==str:
+#     if 'a'<=data[-1][0]<='z' or 'A'<=data[-1][0]<='Z':
+#         if data[-1][0] in 'aeiouAEIOU':
+#             print(ord(data[-1][0]))
+#         else:
+#             print("no ascii for you")
+#     else:
+#         print("not alphabet")
+# else:
+#     print("not string")
+
+#Q: collection even/odd int/square
+# data=[5,'Hi',10.5,'hello']
+# if len(data)%2==0:
+#     if type(data[0]) == int:
+#         if data[0]%2 == 1:
+#             print(data[0]**2)
+#         else:
+#             print("no square, even data")
+#     else:
+#         print("not integer")
+# else:
+#     print("odd no. of elements")
+
+#Q: input starts with alphabet, ascii even/not, if even square
+# data=input("enter something: ")
+# if 'a'<=data[0]<='z' or 'A'<=data[0]<='Z':
+#     if ord(data[0])%2==0:
+#         print((ord(data[0]))**2)
+#     else:
+#         print("ascii is odd")
+# else:
+#     print("first letter is not an alphabet")
