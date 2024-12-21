@@ -3,9 +3,10 @@ this program in no way satisfies all conditions and exceptions
 so bear in mind this program will break if you let's say for example enter date without'-' 
 or use wrong date which cannot even exist like 400, the code will still run
 but we can all agree that's some bs code so it's your responsibility enter details properly
-since I was limited to using if else here I really wanted to pull my hairs out while coding
-this shitty code I wanted to use modules/functions and loops all the way through
+since I was limited to using if else here I wad having an inner crashout out while coding
+this shitty code, I wanted to use modules/functions/loops all the way through
 so that's all enjoy the coding..."""
+
 import time
 #import getpass
 users={
