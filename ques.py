@@ -162,7 +162,7 @@
 #         if data[-1][0] in 'aeiouAEIOU':
 #             print(ord(data[-1][0]))
 #         else:
-#             print("no ascii for you")
+#             print("no ascii for you (no vowel)")
 #     else:
 #         print("not alphabet")
 # else:
