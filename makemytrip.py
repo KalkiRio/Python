@@ -3,15 +3,17 @@ this program in no way satisfies all conditions and exceptions
 so bear in mind this program will break if you let's say for example enter date without'-' 
 or use wrong date which cannot even exist like 400, the code will still run
 but we can all agree that's some bs code so it's your responsibility enter details properly
-since I was limited to using if else here I wad having an inner crashout out while coding
+since I was limited to using if else here I wad having an inner meltdown out while coding
 this shitty code, I wanted to use modules/functions/loops all the way through
-so that's all enjoy the coding..."""
+so that's all happy coding..."""
 
 import time
 #import getpass
 users={
     "rio":"rio123",
     "Sr26":"123123",
+    "vishalkr":"vk123",
+    "ssr":"ssr123",
 }
 fprice=5000
 hprice=1000
