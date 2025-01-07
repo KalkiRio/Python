@@ -271,6 +271,55 @@
 #         s+=chr(ord(i[-1])-32)
 # print(s)
 
-for i in range(1,4):
-    for j in range(1,4):
-        print(f"{i},{j}")
+# for i in range(1,4):
+#     for j in range(1,4):
+#         print(f"{i},{j}")
+
+#Q
+# s='hai hello priya'
+# d={}
+# l=s.split()
+# for i in l:
+#     c=0
+#     for j in i:
+#         if j in 'aeiouAEIOU':
+#             c+=1
+#     d[i]=c
+# print(d)
+
+#Q
+# s='Python is very easy'
+# l=s.split()
+# print(l)
+# d={}
+# for i in l:
+#     c=0
+#     for j in i:
+#         if j in 'AEIOUaeiou':
+#             c+=1
+#     d[i]=[i,c,i[::-1]]
+# print(d)
+
+#Q
+s='aaaabbbacccbca'
+# d={}
+# for i in s:
+#     if i in d:
+#         d[i]+=1
+#     else:
+#         d[i]=1
+# res = ''
+# for key, value in d.items():
+#     res += f"{key}{value}"
+# print(res)
+
+#2nd solution
+# res=''
+# for i in s:
+#     c=0
+#     for j in s:
+#         if i==j:
+#             c+=1
+#     if i not in res:
+#         res+=f"{i}{c}"
+# print(res)
