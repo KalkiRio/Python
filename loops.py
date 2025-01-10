@@ -301,7 +301,7 @@
 # print(d)
 
 #Q
-s='aaaabbbacccbca'
+# s='aaaabbbacccbca'
 # d={}
 # for i in s:
 #     if i in d:
@@ -323,3 +323,162 @@ s='aaaabbbacccbca'
 #     if i not in res:
 #         res+=f"{i}{c}"
 # print(res)
+
+##s='abcaabbsdabc'
+##target='abbs'
+##for i in range(len(s)-(len(target)+1)):
+##    found=True
+##    for j in range(len(target)):
+##        if s[i+j]!=target[j]:
+##            found=False
+##            break
+##    if found:
+##        print(i)
+
+
+# for i in range(1,6):
+#     for j in range(1,6):
+#         if i in (1,5) or j in (1,5):
+#             print("*",end=' ')
+#         else:
+#             print(' ',end=' ')
+#     print()
+
+# for i in range(1,6):
+#     for j in range(1,6):
+#         if i ==1 or j==1:
+#             print("*",end=' ')
+#         else:
+#             print(' ',end=' ')
+#     print()
+
+# for i in range(1,6):
+#     for j in range(1,6):
+#         if i ==5 or j==1:
+#             print("*",end=' ')
+#         else:
+#             print(' ',end=' ')
+#     print()
+
+# for i in range(1,6):
+#     for j in range(1,6):
+#         if i ==1 or j==5:
+#             print("*",end=' ')
+#         else:
+#             print(' ',end=' ')
+#     print()
+
+# for i in range(1,6):
+#     for j in range(1,6):
+#         if i ==5 or j==5:
+#             print("*",end=' ')
+#         else:
+#             print(' ',end=' ')
+#     print()
+
+# for i in range(1,6):
+#     for j in range(1,6):
+#         if j<=i:
+#             print('*',end=' ')
+#         else:
+#             print(' ',end=' ')
+#     print()
+
+# for i in range(1,6):
+#     for j in range(1,6):
+#         if i<=j:
+#             print('*',end=' ')
+#         else:
+#             print(' ',end=' ')
+#     print()
+
+# for i in range(1,6):
+#     for j in range(5,0,-1):
+#         if j<=i:
+#             print("*", end=' ')
+#         else:
+#             print(' ', end=' ')
+#     print()
+
+# for i in range(1,6):
+#     for j in range(5,0,-1):
+#         if i<=j:
+#             print('*',end=' ')
+#         else:
+#             print(' ',end=' ')
+#     print()
+
+
+
+#09/jan/2025
+#Q1
+# s = 'kabab is love'
+# l = s.split()
+# d = {}
+# for i in range(len(l)):
+#     count = 0
+#     for j in range(len(l[i])):
+#         if l[i][j] in 'aeiouAEIOU':
+#             count += 1
+#     if l[i]==l[-1]:
+#         if l[i] not in d:
+#             d[l[i][::-1]]=[l[i][::-1],count,l[i][::2]]
+#     else:
+#         if l[i] not in d:
+#             d[l[i]] = [l[i][::-1], count, l[i][::2]]
+# print(d)
+
+#2nd solution for the above question
+# s = 'kabab is love'
+# l = s.split()
+# d = {}
+# for i in l:
+#     count=0
+#     for j in i:
+#         if j in 'aeiouAEIOU':
+#             count+=1
+#     if i==l[-1]:
+#         if i not in d:
+#             d[i[::-1]]=[i[::-1], count, i[::2]]
+#     else:
+#         if i not in d:
+#             d[i]=[i[::-1], count, i[::2]]
+# print(d)
+
+#Q2
+# l=[100,200,35,40,60]
+# res=[]
+# sum=0
+# for i in l:
+#     sum+=i
+# for i in l:
+#     res.append(sum-i)
+# print(res)
+
+#Q3
+# s = 'kabab is love'
+# l = s.split()
+# d = {}
+# for i in l:
+#     count = 0
+#     consonant = ''
+#     for j in i:
+#         if j not in 'AEIOUaeiou':
+#             count += 1
+#             consonant += j
+#     key = f'{i[0]}{i[-1]}'
+#     if key not in d:
+#         d[key] = (consonant, count, consonant[::-1])
+# print(d)
+
+#Q4
+# d={10:'star',20:'bye',30:'moon',40:'apple'}
+# d2={}
+# for i in d.items():
+#     vowels=''
+#     for j in i[1]:
+#         if j in 'aeiouAEIOU':
+#             vowels+=j
+#     if i[0] not in d2:
+#         d2[i[0]]=vowels
+# print(d2)
