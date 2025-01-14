@@ -160,6 +160,25 @@
 #             d2[key] = d[key]
 #         index -= 1
 # print(d2)
+#OR with methods
+# d={10:'a',20:'b',30:'c'}
+# d2={}
+# l=list(d.items())
+# n=len(l)
+# for i in range(len(l)//2):
+#     l[i],l[n-1-i]=l[n-1-i],l[i]
+# for i in l:
+#     d2[i[0]]=i[1]
+# print(d2)
+#OR with methods
+# d={10:'a',20:'b',30:'c'}
+# d2={}
+# l=list(d.items())
+# n=len(l)
+# for i in range(len(l)-1,-1,-1):
+#     d2[l[i][0]]=l[i][1]
+# print(d2)
+
 
 #Q10
 # s='hello'
@@ -213,7 +232,7 @@
 #         if i%2==0:
 #             s3+=s[i]
 #     print(s3)
-# else:
+# elif s[0].isalpha():
 #     for i in s:
 #         s2=i+s2
 #     print(s2)
@@ -223,7 +242,7 @@
 # for i in l:
 #     if i[0] in 'aeiouAEIOU':
 #         l2.append(i[::2])
-#     else:
+#     elif i[0].isalpha():
 #         l2.append(i[::-1])
 # print(l2)
 
@@ -249,7 +268,7 @@
 # l1=[]
 # l2=[]
 # for i in l:
-#     l1=l1+i.split('.')
+#     l1+=i.split('.')
 # for i in range(1,len(l1),2):
 #     l2.append(l1[i])
 # print(l2)
@@ -263,13 +282,22 @@
 
 #Q20
 # l='just looking like a wow'
-# l2=l.split()
-# print(l2)
+# l1=[]
 # s=''
+# l2=l.split()
 # for i in l2:
+#     word=''
 #     if len(i)%2==0:
-#         s+=chr(ord(i[-1])-32)
-# print(s)
+#         word+=i[:-1]+chr(ord(i[-1])-32)
+#         l1.append(word)
+#         s+=word+' '
+#     else:
+#         for j in i:
+#             word+=chr(ord(j)-32)
+#         l1.append(word)
+#         s+=word+' '
+# print(l1) #list output
+# print(s) #string output
 
 # for i in range(1,4):
 #     for j in range(1,4):
@@ -428,7 +456,7 @@
 #             d[l[i]] = [l[i][::-1], count, l[i][::2]]
 # print(d)
 
-#2nd solution for the above question
+# 2nd solution for the above question
 # s = 'kabab is love'
 # l = s.split()
 # d = {}
@@ -445,7 +473,7 @@
 #             d[i]=[i[::-1], count, i[::2]]
 # print(d)
 
-#Q2
+# Q2
 # l=[100,200,35,40,60]
 # res=[]
 # sum=0
@@ -455,7 +483,7 @@
 #     res.append(sum-i)
 # print(res)
 
-#Q3
+# Q3
 # s = 'kabab is love'
 # l = s.split()
 # d = {}
@@ -471,7 +499,7 @@
 #         d[key] = (consonant, count, consonant[::-1])
 # print(d)
 
-#Q4
+# Q4
 # d={10:'star',20:'bye',30:'moon',40:'apple'}
 # d2={}
 # for i in d.items():
