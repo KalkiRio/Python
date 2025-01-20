@@ -240,6 +240,8 @@
 #     i+=1
 # print(s)
 
+# print(*l)
+
 #Q
 # l='just looking like a wow'
 # l2=l.split()
