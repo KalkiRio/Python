@@ -87,4 +87,3 @@
 # def bio(name,place='bangalore',date='20-01-25'):
 #     return name
 # print(bio(place='gurugram',name='elon'))
-
