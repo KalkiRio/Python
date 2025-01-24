@@ -51,3 +51,32 @@
 # s1=Python('vishal',1001)
 # s1.display()
 
+import time
+class Company:
+    c_name='Vertical Labs'
+    c_loc = 'Gurugram'
+    c_phno=9876564534
+    
+    def __init__(self,ename,eid,sal,comm):
+        self.ename=ename
+        self.eid=eid
+        self.sal=sal
+        self.comm=comm
+    def display(self):
+        print(self.ename,self.eid,self.sal,self.comm,self.c_loc,self.c_name,self.c_phno)
+    def rename(self,n_name):
+        self.ename=n_name
+    def ch_sal(self,nsal):
+        self.sal=nsal
+
+emp1=Company('vishal',101,6700000,None)
+emp2=Company('SSR',102,7600000,200)
+emp3=Company('Rio',103,6700000,200)
+
+emp3.ch_sal(6800000)
+emp1.rename('Hiranyakashyap')
+emp1.display()
+time.sleep(2)
+emp3.display()
+time.sleep(2)
+Company.display(emp2)
