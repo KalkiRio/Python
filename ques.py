@@ -190,3 +190,10 @@
 #         print("ascii is odd")
 # else:
 #     print("first letter is not an alphabet")
+
+# s='hello my name is Rio'
+# l=s.split()
+# s=''
+# for i in l:
+#     s=f'{i} '+s
+# print(s)

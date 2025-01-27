@@ -81,3 +81,28 @@
 # time.sleep(2)
 # Company.display(emp2)
 
+# class Bank:
+#     b_name='Kotak'
+#     b_name='Gurugram'
+#     ifsc='KKBK000726'
+#     balance=0
+    
+#     def __init__(self,name,accno,ph):
+#         self.name=name
+#         self.accno=accno
+#         self.ph=ph
+#     def deposit(self,amount):
+#         self.balance+=amount
+#         print(f"after deposit the balance is {self.balance}")
+#     def withdraw(self,amount):
+#         if amount<=self.balance:
+#             self.balance-=amount
+#             print(f"balance is {self.balance}")
+#         else:
+#             print("insufficient balance")
+#     def show_bal(self):
+#         print(f"your balance is {self.balance}")
+
+# ob1=Bank('nitin',98765645443,9876543245)
+# ob1.deposit(200000)
+# ob1.withdraw(30000)
