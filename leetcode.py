@@ -94,6 +94,63 @@
 #             res+=[i]
 # print(res)
 
+# class Solution:
+#     def hasDuplicate(self, nums) -> bool:
+#         hashset=set()
+#         for i in nums:
+#             if i in hashset:
+#                 return True
+#             else:
+#                 hashset.add(i)
+#         return False
+# nums: int = [1,2,3,3]
+# answer=Solution()
+# print(answer.hasDuplicate(nums))
+
+
+# from collections import Counter
+# def anagram(s,t)->bool:
+#     hashmap=Counter(s)
+#     if len(s)!=len(t):
+#         return False
+#     else:
+#         for i in t:
+#             if i in hashmap:
+#                 hashmap[i]-=1
+#         for value in hashmap.values():
+#             if value!=0:
+#                 return False
+#         return True
+#or
+# def anagram(s: str, t: str) -> bool:
+#     if len(s) != len(t):
+#         return False
+#     return Counter(s) == Counter(t)
+#or
+# def anagram(s: str, t: str) -> bool:
+#     if len(s) != len(t):
+#         return False
+    
+#     count_s = {}
+#     for char in s:
+#         count_s[char] = count_s.get(char, 0) + 1
+
+#     for char in t:
+#         if char in count_s:
+#             count_s[char] -= 1
+#             if count_s[char] == 0:
+#                 del count_s[char]
+#         else:
+#             return False
+
+#     return len(count_s) == 0
+# s = "name"
+# t = "mane"
+# print(anagram(s,t))
+
+
+
+
 #                         *    
 #                         * *  
 #     *       * * * e e e * * *
@@ -142,3 +199,4 @@
 #     for j in range(n):
 #         print(' ',end=' ')
 #     print()
+
