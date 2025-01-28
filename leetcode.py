@@ -234,7 +234,7 @@
 #             elif nums[i]<nums[j]:
 #                 i+=1
 #         elif nums[i]+nums[j]==target:
-#             return f'index are: {i}, {j}'
+#             return f'index are: {i}, {j}' #O(n^2) time and O(1) space complexity
 #or
 # def twosum(nums:[int],target:int)->str:
 #     hashmap={}
@@ -242,6 +242,6 @@
 #         diff=target-nums[i]
 #         if diff in hashmap:
 #             return f'{hashmap[diff]},{i}'
-#         hashmap[nums[i]]=i
+#         hashmap[nums[i]]=i  # O(n) time and O(n) space complexity
 
 # print(twosum(nums,target))
