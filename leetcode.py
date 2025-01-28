@@ -200,3 +200,48 @@
 #         print(' ',end=' ')
 #     print()
 
+# n=5
+# for i in range(n):
+#     for j in range(i,n):
+#         print(" ",end=" ")
+#     for j in range(i):
+#         if j==0 or i==n-1:
+#             print("*",end=" ")
+#         else:
+#             print(" ",end=" ")
+#     for j in range(i+1):
+#         if j==i or i==n-1:
+#             print("*",end=" ")
+#         else:
+#             print(" ",end=" ")
+#     print()
+
+# nums=[15,7,2,1]
+# nums=[1,7,3,2]
+# target=9
+# def twosum(nums:[int],target:int)->str:
+#     i=0
+#     j=len(nums)-1
+#     while i<j:
+#         if nums[i]+nums[j]>target:
+#             if nums[i]>nums[j]:
+#                 i+=1
+#             elif nums[i]<nums[j]:
+#                 j-=1
+#         elif nums[i]+nums[j]<target:
+#             if nums[i]>nums[j]:
+#                 j-=1
+#             elif nums[i]<nums[j]:
+#                 i+=1
+#         elif nums[i]+nums[j]==target:
+#             return f'index are: {i}, {j}'
+#or
+# def twosum(nums:[int],target:int)->str:
+#     hashmap={}
+#     for i in range(len(nums)):
+#         diff=target-nums[i]
+#         if diff in hashmap:
+#             return f'{hashmap[diff]},{i}'
+#         hashmap[nums[i]]=i
+
+# print(twosum(nums,target))
