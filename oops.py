@@ -107,15 +107,17 @@
 # ob1.deposit(200000)
 # ob1.withdraw(30000)
 
-class Demo:
-    a=10
-    _b=20
-    __c=30
-    def display(self):
-        print(self.a,self._b,self.__c)
-    def getters(self):
-        return self.__c
-    def setters(self,new):
-        self.__c=new
-ob1=Demo()
-ob1.display()
+# class Demo:
+#     a=10
+#     _b=20
+#     __c=30
+#     def display(self):
+#         print(self.a,self._b,self.__c)
+#     def getters(self):
+#         return self.__c
+#     def setters(self,new):
+#         self.__c=new
+# ob1=Demo()
+# ob1.display()
+
+# abstraction:

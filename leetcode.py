@@ -160,14 +160,8 @@
 #     *                        
 # n=int(input("enter a number: "))
 # for i in range(n-1):
-#     for j in range(n):
+#     for j in range(n*4):
 #         print(' ',end=' ')
-#     for j in range(n):
-#         print(' ',end=' ')
-#     for j in range(n):
-#         print(' ',end=' ')
-#     for j in range(n):
-#         print(' ', end=' ')
 #     for j in range(i+1):
 #         print('*', end=' ')
 #     print()
@@ -243,5 +237,4 @@
 #         if diff in hashmap:
 #             return f'{hashmap[diff]},{i}'
 #         hashmap[nums[i]]=i  # O(n) time and O(n) space complexity
-
 # print(twosum(nums,target))
