@@ -238,3 +238,87 @@
 #             return f'{hashmap[diff]},{i}'
 #         hashmap[nums[i]]=i  # O(n) time and O(n) space complexity
 # print(twosum(nums,target))
+
+# s="naman"
+# l=0
+# r=len(s)-1
+# pali=False
+# while l<r:
+#     if s[l]==s[r]:
+#         l+=1
+#         r-=1
+#         pali=True
+#     else:
+#         break
+# if pali:
+#     print("string is a palindrome")
+# else:
+#     print("string is not a palindrome")
+
+# num=1245421
+# reverse=0
+# temp=num
+# while temp>0:
+#     digit=temp%10
+#     reverse = reverse*10+digit
+#     temp//=10
+# if reverse==num:
+#     print("palindrome number")
+# else:
+#     print("not a palindrome")
+
+# num=153
+# temp=num
+# sum=0
+# len_num=len(str(num))
+# while temp>0:
+#     digit=temp%10
+#     sum+=digit**len_num
+#     temp//=10
+# if sum==num:
+#     print("this is an armstrong number")
+# else:
+#     print("this is not armstrong number")
+
+# def fact(n):
+#     """recursive method """
+#     # if n==0 or n==1:
+#     #     return 1
+#     # else:
+#     #     return n*fact(n-1)
+#     """iterative method """
+#     # result=1
+#     # for i in range(1,n+1):
+#     #     result*=i
+#     # return result
+# def strong(num):
+#     """armstrong number program"""
+#     temp=num
+#     sum=0
+#     while temp>0:
+#         digit=temp%10
+#         sum+=fact(digit)
+#         temp//=10
+#     if sum==num:
+#         return f"{num} is a strong number"
+#     return f"{num} is not a strong number"
+# num=int(input("enter a number to check for strong number: "))
+# print(strong(num))
+# print(fact.__doc__)
+
+# def fib(n):
+#     if n<=0:
+#         return 0
+#     elif n==1:
+#         return 1
+#     """iterative method"""
+#     # a,b=0,1
+#     # for i in range(2,n+1):
+#     #     a,b=b,a+b
+#     # return b
+#     """recursive method"""
+#     # return fib(n-1)+fib(n-2)
+
+# n=int(input("enter a number: "))
+# for i in range(n):
+#     print(fib(i))
