@@ -122,28 +122,28 @@
 
 # abstraction:
 # from abc import ABC,abstractmethod
-import abc
-class Whatsapp(abc.ABC):
-    @abc.abstractmethod
-    def chat(self):
-        ...
-    @abc.abstractmethod
-    def camera(self):
-        ...
-    @abc.abstractmethod
-    def status(self):
-        ...
-class Dev1(Whatsapp):
-    def chat(self):
-        print("chat is being worked on")
-class Dev2(Dev1):
-    def camera(self):
-        print("camera is being worked on ")
-class Dev3(Dev2):
-    def status(self):
-        print("status is being worked on")
+# import abc
+# class Whatsapp(abc.ABC):
+#     @abc.abstractmethod
+#     def chat(self):
+#         ...
+#     @abc.abstractmethod
+#     def camera(self):
+#         ...
+#     @abc.abstractmethod
+#     def status(self):
+#         ...
+# class Dev1(Whatsapp):
+#     def chat(self):
+#         print("chat is being worked on")
+# class Dev2(Dev1):
+#     def camera(self):
+#         print("camera is being worked on ")
+# class Dev3(Dev2):
+#     def status(self):
+#         print("status is being worked on")
 
-d1=Whatsapp()
-d1.status()
-d1.camera()
-d1.chat()
+# d1=Whatsapp()
+# d1.status()
+# d1.camera()
+# d1.chat()
