@@ -167,22 +167,128 @@ import time
 
 #Q2:
 # class Library:
-#     no_books=5
-#     d={
-#     'python':10,
-#     'java':20,
-#     'sql':20,
-#     'html':10
+#     l_books = {
+#         'python': 10,
+#         'java': 20,
+#         'sql': 20,
+#         'html': 10
 #     }
-#     def __init__(self):
-#         pass
-#     def issue_book(self):
-#         pass
-#     def return_book(self):
-#         pass
+
+#     def __init__(self, name, l_c_id, no_books=5):
+#         self.name = name
+#         self.l_c_id = l_c_id
+#         self.no_books = no_books
+#         self.issued_books = {}
+
+#     def issue_book(self, book_name, count):
+#         self.no_books -= count
+#         if self.no_books < 0:
+#             print("\nYour limit of 5 books exceeded")
+#             return
+
+#         if book_name in Library.l_books and Library.l_books[book_name] > 0 and Library.l_books[book_name]>=count:
+#             if book_name in self.issued_books:
+#                 self.issued_books[book_name]['count'] += count
+#             else:
+#                 self.issued_books[book_name] = {
+#                     'count': count,
+#                     'return_date': "15 days"
+#                 }
+#             Library.l_books[book_name] -= count
+#             print(f"\nIssued {book_name}. You now have {self.issued_books[book_name]['count']} copies. You can issue {self.no_books} more books.")
+#         else:
+#             print(f"\nSorry, {book_name} is not available.")
+
+#     def return_book(self, book_name, count):
+#         if book_name in self.issued_books and self.issued_books[book_name]['count'] > 0 and count<=self.issued_books[book_name]['count']:
+#             self.issued_books[book_name]['count'] -= count
+#             Library.l_books[book_name] += count
+#             self.no_books += count
+#             print(f"\nReturned {book_name}. You now have {self.issued_books[book_name]['count']} copies. You can issue {self.no_books} more books.")
+#             if self.issued_books[book_name]['count'] == 0:
+#                 del self.issued_books[book_name]
+#         else:
+#             print(f"\nEnter valid book name or amount of books to return")
+
 #     def books_available(self):
-#         pass
-# student=Library()
+#         print("\nBooks available in the library:")
+#         for book in Library.l_books.items():
+#             print(f"{book[0]}: {book[1]} copies")
+
+#     def borrowed_books(self):
+#         if not self.issued_books:
+#             print("\nYou have not borrowed any books.")
+#         else:
+#             print("\nBorrowed books:")
+#             for book in self.issued_books.items():
+#                 print(f"{book[0]}: {book[1]['count']} copies, Return within {book[1]['return_date']}")
+
+# students = []
+# student1=Library("Rio","1234")
+# students.append(student1)
+
+# def generate_unique_l_c_id():
+#     while True:
+#         l_c_id = str(random.randint(1000, 9999))
+#         unique = True
+#         for student in students:
+#             if student.l_c_id == l_c_id:
+#                 unique = False
+#                 break
+#         if unique:
+#             return l_c_id
+
+# def register():
+#     name = input("Enter your name: ")
+#     if not name:
+#         print("Name is required.")
+#         return
+
+#     l_c_id = generate_unique_l_c_id()
+#     student = Library(name, l_c_id)
+#     students.append(student)
+#     print(f"\nStudent registered with name: {name} and library card ID: {l_c_id}")
+
+# def signin():
+#     l_c_id = input("Enter your library card ID: ")
+
+#     for student in students:
+#         if student.l_c_id == l_c_id:
+#             print(f"\nWelcome, {student.name}!")
+#             return student
+#     print("Invalid library card ID.")
+#     return None
+
+# while True:
+#     choice = input("\nDo you want to register or sign in?\n1.register\n2.signin\n3.exit\nEnter your choice: ")
+#     if choice == "1":
+#         register()
+#     elif choice == "2":
+#         student = signin()
+#         if student:
+#             while True:
+#                 action = input("\nWelcome to Grand Library:\n1.borrow a book\n2.return a book\n3.check available books\n4.check borrowed books\n5.logout?\nEnter(1/2/3/4/5): ")
+#                 if action == "1":
+#                     book_name = input("Enter the name of the book to borrow: ").lower()
+#                     b_count=int(input(f"Enter no. of {book_name} books you want to borrow: "))
+#                     student.issue_book(book_name,b_count)
+#                 elif action == "2":
+#                     book_name = input("Enter the name of the book to return: ").lower()
+#                     r_count=int(input(f"Enter no. of {book_name} you want to return: "))
+#                     student.return_book(book_name,r_count)
+#                 elif action == "3":
+#                     student.books_available()
+#                 elif action == "4":
+#                     student.borrowed_books()
+#                 elif action == "5":
+#                     break
+#                 else:
+#                     print("Invalid action.")
+#     elif choice == "3":
+#         break
+#     else:
+#         print("Invalid choice.")
+
 
 # #Q3:
 # class Book_my_show:
