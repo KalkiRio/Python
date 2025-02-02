@@ -426,21 +426,167 @@ import time
 
 # #Q4:
 # class Flipkart:
-#     d={
-#         'iphone':50,
-#         'oneplus':30,
-#         'samsung':20,
-#         'redmi':100,
+#     products = {
+#         'iphone': {'count': 50, 'price': 150000},
+#         'oneplus': {'count': 30, 'price': 45000},
+#         'samsung': {'count': 20, 'price': 60000},
+#         'redmi': {'count': 100, 'price': 22000},
 #     }
-#     def buy_items(self):
-#         pass
-#     def add_to_cart(self):
-#         pass
+
+#     def __init__(self, name, email, p_no, username, password):
+#         self.name = name
+#         self.email = email
+#         self.p_no = p_no
+#         self.username = username
+#         self.password = password
+#         self.cart = {}
+#         self.bought_items = {}
+
 #     def show_avail_items(self):
-#         pass
-# customer=Flipkart()
+#         print("\nAvailable products:")
+#         for product in Flipkart.products.items():
+#             print(f"{product[0]}: {product[1]['count']} units, Price: Rs.{product[1]['price']}")
+
+#     def generate_product_id(self):
+#         while True:
+#             product_id = str(random.randint(10000, 99999))
+#             unique = True
+#             for items in self.cart.values():
+#                 if product_id in items:
+#                     unique = False
+#                     break
+#             if unique:
+#                 return product_id
+
+#     def add_to_cart(self, product_name, count):
+#         if product_name in Flipkart.products:
+#             product_ids = [self.generate_product_id() for p in range(count)]
+#             if product_name in self.cart:
+#                 self.cart[product_name].extend(product_ids)
+#             else:
+#                 self.cart[product_name] = product_ids
+#             print(f"\nAdded {count} {product_name}(s) to cart. Product IDs: {', '.join(product_ids)}")
+#         else:
+#             print(f"\nSorry, {product_name} is not available.")
+
+#     def show_cart(self):
+#         if not self.cart:
+#             print("\nYour cart is empty.")
+#         else:
+#             print("\nItems in your cart:")
+#             for product, product_ids in self.cart.items():
+#                 print(f"{product}: {len(product_ids)} units. Product IDs: {', '.join(product_ids)}")
+
+#     def buy_items(self):
+#         if not self.cart:
+#             print("\nYour cart is empty.")
+#         else:
+#             total_price = 0
+#             print("\nPurchased items:")
+#             for product, product_ids in self.cart.items():
+#                 Flipkart.products[product]['count'] -= len(product_ids)
+#                 item_price = Flipkart.products[product]['price'] * len(product_ids)
+#                 total_price += item_price
+#                 if product in self.bought_items:
+#                     self.bought_items[product].extend(product_ids)
+#                 else:
+#                     self.bought_items[product] = product_ids
+#                 print(f"{product}: {len(product_ids)} units. Product IDs: {', '.join(product_ids)}. Total price: Rs.{item_price}")
+#             self.cart.clear()
+#             print(f"\nTotal amount to be paid: Rs.{total_price}")
+
+#     def show_bought_items(self):
+#         if not self.bought_items:
+#             print("\nYou have not bought any items.")
+#         else:
+#             print("\nBought items:")
+#             for product, product_ids in self.bought_items.items():
+#                 print(f"{product}: {len(product_ids)} units. Product IDs: {', '.join(product_ids)}")
+
+# customers = []
+# customer1 = Flipkart("rio", "rio@gmail.com", "9887766554", "rio123", "123123")
+# customers.append(customer1)
+
+# def register():
+#     name = input("Enter your name: ")
+#     if not name:
+#         print("Name is required.")
+#         return
+
+#     email = input("Enter your email (optional): ")
+#     if not email:
+#         email = None
+
+#     p_no = input("Enter your phone number: ")
+#     if not p_no:
+#         print("Phone number is required.")
+#         return
+
+#     username = input("Enter a username: ")
+#     if not username:
+#         print("Username is required.")
+#         return
+
+#     password = input("Enter a password: ")
+#     if not password:
+#         print("Password is required.")
+#         return
+
+#     customer = Flipkart(name, email, p_no, username, password)
+#     customers.append(customer)
+#     print(f"Customer registered with username: {username}")
+
+# def signin():
+#     username = input("Enter your username: ")
+#     password = input("Enter your password: ")
+
+#     for customer in customers:
+#         if customer.username == username and customer.password == password:
+#             print(f"Welcome, {customer.name}!")
+#             return customer
+#     print("Invalid username or password.")
+#     return None
+
+# while True:
+#     choice = input("\nDo you want to register or sign in?\n1.register\n2.signin\n3.exit\nEnter your choice: ")
+#     if choice == "1":
+#         register()
+#     elif choice == "2":
+#         customer = signin()
+#         if customer:
+#             while True:
+#                 action = input("\nWelcome to Flipkart:\n1.show available items\n2.buy items\n3.show cart\n4.show bought items\n5.logout\nEnter(1/2/3/4/5): ")
+#                 if action == "1":
+#                     customer.show_avail_items()
+#                 elif action == "2":
+#                     while True:
+#                         product_name = input("Enter the name of the product to add to cart: ").lower()
+#                         count = int(input(f"Enter number of {product_name}(s) to add to cart: "))
+#                         customer.add_to_cart(product_name, count)
+#                         option = input("Do you want to add more items or proceed to checkout?\n1.add\n2.checkout\nEnter your option: ")
+#                         if option == "2":
+#                             customer.show_cart()
+#                             confirm = input("Do you want to confirm the purchase? (y/n): ").lower()
+#                             if confirm == "y":
+#                                 customer.buy_items()
+#                                 break
+#                             else:
+#                                 print("Purchase cancelled.")
+#                                 break
+#                 elif action == "3":
+#                     customer.show_cart()
+#                 elif action == "4":
+#                     customer.show_bought_items()
+#                 elif action == "5":
+#                     break
+#                 else:
+#                     print("Invalid action.")
+#     elif choice == "3":
+#         break
+#     else:
+#         print("Invalid choice.")
 
 # #Q5:
 # class Age_calculation:
-    
+
 
