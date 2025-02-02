@@ -592,14 +592,14 @@ import time
 #     def age(self,yob):
 #         if yob<Age_calculation.curr_year:
 #             self.age = Age_calculation.curr_year-yob
-#             print(f"age is {self.age}")
+#             print(f"Age is {self.age}")
 #             if self.age>95:
-#                 print("this person is probably dead already")
+#                 print("This person is probably dead already")
 #         else:
 #             print("Enter a valid year")
 
 # while True:
-#     yob=int(input("enter your year of birth to check age: "))
+#     yob=int(input("enter year of birth to check age: "))
 #     check=Age_calculation()
 #     check.age(yob)
 #     option=input("do you want to check another person's age? (y/n): ").lower()
