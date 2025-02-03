@@ -1,2 +1,2 @@
-#Python notes
-this repo isjust simple python notes
+*Python notes
+this repo is just simple python notes
