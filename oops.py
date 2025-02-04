@@ -147,3 +147,19 @@
 # d1.status()
 # d1.camera()
 # d1.chat()
+
+#user defined polymorphism
+class  Example:
+    def type(self,arg):
+        if type(arg)==str:
+            print(arg[::-1])
+        elif type(arg)==list:
+            print(arg[::2])
+        elif type(arg)==tuple:
+            print(arg[:3])
+        else:
+            print("invalid datatype")
+e=Example()
+e.type("hello")
+e.type([10,20,30])
+e.type((10,30,56,67,90))

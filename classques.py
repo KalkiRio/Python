@@ -119,7 +119,7 @@ def register():
 
     attempts=3
     while attempts>0:
-        captcha=rcaptcha.generate_captcha6()
+        captcha=rcaptcha.captcha6()
         recaptcha=input(f"Enter the captcha {captcha}: ")
         if recaptcha==captcha:
             break
@@ -141,7 +141,7 @@ def signin():
     password = input("Enter your password: ")
     attempts=3
     while attempts>0:
-        captcha=rcaptcha.generate_captcha6()
+        captcha=rcaptcha.captcha6()
         recaptcha=input(f"Enter the captcha {captcha}: ")
         if recaptcha==captcha:
             break
@@ -159,7 +159,7 @@ def signin():
     print("Invalid username or password.")
     return None
 
-dummy_user1 = Bank("Rio", "rio@123.com", "1234567890", "01-01-82", "rio123", "123123", generate_unique_acc_no(),bal=48)
+dummy_user1 = Bank("Rio", "rio@123.com", "1234567890", "01-01-82", "rio123", "123123", generate_unique_acc_no(),bal=79)
 dummy_user2 = Bank("Killua", "killua@zoldyk.com", "0987654321", "02-02-92", "killua", "hunterxhunter", generate_unique_acc_no(),bal=90000)
 users.append(dummy_user1)
 users.append(dummy_user2)
