@@ -1,6 +1,10 @@
 import random
 import rcaptcha
 import time
+import sqlite3
+
+conn = sqlite3.connect("blinkit.db")
+cur=conn.cursor()
 
 def customer_login():
     pass
@@ -21,12 +25,13 @@ def checkout():
 
 while True:
     print("\n_____________________________________BlinkIt___________________________________")
-    login_opt=int(input((f"\n\t1.Admin Login\t\t2.Customer Login\t\t3.Exit\n\nEnter your option (1/2/3): ")))
-    if login_opt==1:
-        admin_login()
-    elif login_opt==2:
-        customer_login()
-    elif login_opt==3:
+    opt=int(input((f"\n\t1.Customer Options\t\t2.Admin Options\t\t3.Exit\n\nEnter your option (1/2/3): ")))
+    if opt==1:
+        pass
+    elif opt==2:
+        pass
+    elif opt==3:
         break
     else:
         print("Wrong input select either 1/2/3")
+
