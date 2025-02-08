@@ -65,6 +65,9 @@ class BlinkitCustomer:
     def order_cart(self):
         pass
 
+    def order_history(self):
+        pass
+
 
 
     def customer_signin(self)->bool:
@@ -100,15 +103,31 @@ class BlinkitCustomer:
             from products p join b_admin b
             on p.b_id=b.b_id""")
             # products={i[0]:i[1:] for i in cur.fetchall()}
-        except pymysql.MySQLError as msg:
-            print(msg)
+        except Exception as msg:
+            print(f"Error: {msg}")
 
     def delete_acc(self):
         pass
 
     def blinkit_home(self):
-        print("\n_____________________________________BlinkIt___________________________________")
-        self.show_products()
+        while True:
+            try:
+                print("\n_____________________________________BlinkIt___________________________________")
+                choice=int(input("\n1. Buy Items\n2. Check Cart\n3. Check Order History\n4. See Account Details\n5. LogOut\n\nEnter your choice (1/2/3/4/5): "))
+                if choice==1:
+                    self.show_products()
+                elif choice==2:
+                    self.order_cart()
+                elif choice==3:
+                    self.order_history()
+                elif choice==4:
+                    self.customer_details()
+                elif choice==5:
+                    return
+                else:
+                    print("Wrong input, select either 1/2/3/4/5")
+            except Exception as msg:
+                print(f"Error: {msg}\nPlease give proper input...")
 
 
 
