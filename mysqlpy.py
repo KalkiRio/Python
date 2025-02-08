@@ -10,10 +10,12 @@ conn = pymysql.connect(
 )
 cursor = conn.cursor()
 cursor.execute("SELECT * FROM emp")
-for row in cursor.fetchall():
-    print(*row)
-cursor.close()
-conn.close()
+# for row in cursor.fetchall():
+#     print(*row)
+# cursor.close()
+# conn.close()
+data={i[0]: i[1:] for i in cursor.fetchall()}
+print(data)
 
 # conn=mysql.connector.connect(
 #     host="localhost",

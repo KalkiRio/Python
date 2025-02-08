@@ -1,4 +1,3 @@
-import random
 import captcha
 import time
 import hashlib
@@ -15,7 +14,7 @@ class BlinkitCustomer:
             print("Name is required.")
             return
 
-        email = input("Enter your email (optional): ")
+        email = input("Enter your email (optional): ").lower()
 
         phone = input("Enter your phone number (10 digits): ")
         if not phone:
@@ -30,23 +29,23 @@ class BlinkitCustomer:
             return
 
         password = input("Enter a password: ")
-        hashed_password = hashlib.sha256(password.encode()).hexdigest()
         if not password:
             print("Password is required.")
             return
+        hashed_password = hashlib.sha256(password.encode()).hexdigest()
 
-        attempts = 3
-        while attempts > 0:
-            captcha_code = captcha.captcha6()
-            recaptcha = input(f"Enter the captcha {captcha_code}: ")
-            if recaptcha == captcha_code:
-                break
-            else:
-                print(f'Wrong captcha, you have {attempts - 1} attempts left')
-                attempts -= 1
-        if not attempts:
-            print("Register Again")
-            return
+        # attempts = 3
+        # while attempts > 0:
+        #     captcha_code = captcha.captcha6()
+        #     recaptcha = input(f"Enter the captcha {captcha_code}: ")
+        #     if recaptcha == captcha_code:
+        #         break
+        #     else:
+        #         print(f'Wrong captcha, you have {attempts - 1} attempts left')
+        #         attempts -= 1
+        # if not attempts:
+        #     print("Register Again")
+        #     return
 
         try:
             cur.execute(f"""insert into users(c_name,email,phone,username,address,passwd) 
@@ -60,11 +59,12 @@ class BlinkitCustomer:
     def customer_details(self):
         pass
 
+    def checkout(self):
+        pass
+
     def order_cart(self):
         pass
 
-    def checkout(self):
-        pass
 
 
     def customer_signin(self)->bool:
@@ -75,10 +75,10 @@ class BlinkitCustomer:
             return False
 
         password = input("Enter your password: ")
-        hashed_password = hashlib.sha256(password.encode()).hexdigest()
         if not password:
             print("Password is required.")
             return False
+        hashed_password = hashlib.sha256(password.encode()).hexdigest()
 
         try:
             cur.execute(f"""select * from users WHERE username = '{username}' AND passwd = '{hashed_password}'""")
@@ -93,28 +93,48 @@ class BlinkitCustomer:
             print(f"Error: {msg}")
             return False
 
+    def show_products(self):
+        print("\nDelivery in 8 minutes")
+        try:
+            cur.execute("""select p.pid,p.p_name,p.price,p.p_category,p.quantity,b.b_name,b.email,b.phone
+            from products p join b_admin b
+            on p.b_id=b.b_id""")
+            # products={i[0]:i[1:] for i in cur.fetchall()}
+        except pymysql.MySQLError as msg:
+            print(msg)
+
+    def delete_acc(self):
+        pass
+
     def blinkit_home(self):
         print("\n_____________________________________BlinkIt___________________________________")
-        
+        self.show_products()
+
 
 
 def start_app() -> None:
     customer = BlinkitCustomer()
     while True:
-        print("\n_____________________________________BlinkIt___________________________________")
-        opt = int(input((f"\n1. SignUp\n2. SignIn\n3. Exit\n\nEnter your option (1/2/3): ")))
-        if opt == 1:
-            customer.customer_signup()
-        elif opt == 2:
-            login = customer.customer_signin()
-            if login:
-                customer.blinkit_home()
+        try:
+            print("\n_____________________________________BlinkIt___________________________________")
+            opt = int(input((f"\n1. SignUp\n2. SignIn\n3. Delete Account\n4. Exit\n\nEnter your option (1/2/3/4): ")))
+            if opt == 1:
+                customer.customer_signup()
+            elif opt == 2:
+                login = customer.customer_signin()
+                if login:
+                    customer.blinkit_home()
+                else:
+                    start_app()
+            elif opt == 3:
+                customer.delete_acc()
+            elif opt==4:
+                break
             else:
-                start_app()
-        elif opt == 3:
-            break
-        else:
-            print("Wrong input, select either 1/2/3")
+                print("Wrong input, select either 1/2/3")
+        except Exception as msg:
+            print(f"Error: {msg}\nPlease give proper input...")
+            time.sleep(1)
 
 if __name__ == "__main__":
     start_app()
