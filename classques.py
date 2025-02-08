@@ -130,7 +130,6 @@ def register():
         print("Register Again")
         return
 
-
     acc_no = generate_unique_acc_no()
     user = Bank(name, email, p_no, dob, username, password, acc_no)
     users.append(user)

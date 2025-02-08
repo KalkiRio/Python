@@ -1,7 +1,7 @@
 # 1. default Exception
 
 # try:
-#     nume=int(input("enter a number: "))
+#     num=int(input("enter a number: "))
 #     print(num)
 # except:
 #     print("please enter a numeric integer digit not alphabet or special character")
