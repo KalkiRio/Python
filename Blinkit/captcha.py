@@ -16,7 +16,3 @@ def captcha4(length=4):
     characters=string.ascii_letters+string.digits
     captcha=''.join(random.choice(characters) for i in range(length))
     return captcha
-
-# print(generate_captcha6())
-# print(generate_captcha8())
-# print(generate_captcha4())

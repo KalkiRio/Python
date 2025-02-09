@@ -3,9 +3,39 @@ import time
 import hashlib
 from dbmysql import *
 
+def rcaptcha()->bool|None:
+    attempts = 3
+    while attempts > 0:
+        captcha_code = captcha.captcha6()
+        recaptcha = input(f"Enter the captcha {captcha_code}: ")
+        if recaptcha == captcha_code:
+            return True
+        else:
+            print(f'Wrong captcha, you have {attempts - 1} attempts left')
+            attempts -= 1
+    if not attempts:
+        print("Register Again")
+        return
 class BlinkitCustomer:
-    def __init__(self):
-        pass
+
+    def checkout(self):
+        print("\n_____________________________________BlinkIt___________________________________")
+
+    def order_cart(self):
+        print("\n_____________________________________BlinkIt___________________________________")
+
+    def order_history(self):
+        print("\n_____________________________________BlinkIt___________________________________")
+
+    def show_products(self):
+        print("\nDelivery in 8 minutes")
+        try:
+            cur.execute("""select p.pid,p.p_name,p.price,p.p_category,p.quantity,b.b_name,b.email,b.phone
+            from products p join b_admin b
+            on p.b_id=b.b_id""")
+            # products={i[0]:i[1:] for i in cur.fetchall()}
+        except Exception as msg:
+            print(f"Error: {msg}")
 
     def customer_signup(self)->None:
         print("\n_____________________________________BlinkIt___________________________________")
@@ -34,18 +64,9 @@ class BlinkitCustomer:
             return
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
 
-        # attempts = 3
-        # while attempts > 0:
-        #     captcha_code = captcha.captcha6()
-        #     recaptcha = input(f"Enter the captcha {captcha_code}: ")
-        #     if recaptcha == captcha_code:
-        #         break
-        #     else:
-        #         print(f'Wrong captcha, you have {attempts - 1} attempts left')
-        #         attempts -= 1
-        # if not attempts:
-        #     print("Register Again")
-        #     return
+        captcha=rcaptcha()
+        if not captcha:
+            return
 
         try:
             cur.execute(f"""insert into users(c_name,email,phone,username,address,passwd) 
@@ -55,65 +76,72 @@ class BlinkitCustomer:
         except pymysql.MySQLError as msg:
             print(f"Error: {msg}")
 
+    def customer_details(self,userdata:tuple)->None:
+        print("\n_____________________________________BlinkIt___________________________________")
+        print(f"\nUsername: {userdata[-3]}\nName: {userdata[1]}\nPhone number: {userdata[3]}\nEmail: {userdata[2]}")
+        print(f"Address: {userdata[-2]}")
+        time.sleep(2)
 
-    def customer_details(self):
-        pass
-
-    def checkout(self):
-        pass
-
-    def order_cart(self):
-        pass
-
-    def order_history(self):
-        pass
-
-
-
-    def customer_signin(self)->bool:
+    def customer_signin(self)->tuple|None:
         print("\n_____________________________________BlinkIt___________________________________")
         username = input("\nEnter your username: ")
         if not username:
             print("Username is required.")
-            return False
+            return
 
         password = input("Enter your password: ")
         if not password:
             print("Password is required.")
-            return False
+            return
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
 
         try:
             cur.execute(f"""select * from users WHERE username = '{username}' AND passwd = '{hashed_password}'""")
-            user = cur.fetchone()
-            if user:
+            userdata = cur.fetchone()
+            if userdata:
                 print("Login successful!")
-                return True
+                return userdata
             else:
                 print("Invalid username or password.")
-                return False
+                return
         except pymysql.MySQLError as msg:
             print(f"Error: {msg}")
-            return False
+            return
 
-    def show_products(self):
-        print("\nDelivery in 8 minutes")
-        try:
-            cur.execute("""select p.pid,p.p_name,p.price,p.p_category,p.quantity,b.b_name,b.email,b.phone
-            from products p join b_admin b
-            on p.b_id=b.b_id""")
-            # products={i[0]:i[1:] for i in cur.fetchall()}
-        except Exception as msg:
-            print(f"Error: {msg}")
 
-    def delete_acc(self):
-        pass
+    def delete_acc(self,userdata)->bool|None:
+        print("\n_____________________________________BlinkIt___________________________________")
+        confirm=input("\nDo you really want to delete your account?\n(y/n): ").lower()
+        if confirm=='y':
+            password=input("\nEnter your password to delete your account: ")
+            if not password:
+                print("Password is required for account deletion")
+                return
+            hashed_password = hashlib.sha256(password.encode()).hexdigest()
+            if hashed_password == userdata[-1]:
+                captcha=rcaptcha()
+                if not captcha:
+                    return
+                try:
+                    cur.execute(f"""delete from users where uid = {userdata[0]} and passwd = '{hashed_password}'""")
+                    conn.commit()
+                    print("Sorry to see you go >_< ... \nYour Account Has been deleted, See you later!")
+                    time.sleep(2)
+                    return True
+                except pymysql.MySQLError as msg:
+                    print(f"Error: {msg}")
+            else:
+                print("Wrong password try again later.")
+                time.sleep(1)
+                return
+        else:
+            return
 
-    def blinkit_home(self):
+    def blinkit_home(self,userdata: tuple) -> None:
         while True:
             try:
                 print("\n_____________________________________BlinkIt___________________________________")
-                choice=int(input("\n1. Buy Items\n2. Check Cart\n3. Check Order History\n4. See Account Details\n5. LogOut\n\nEnter your choice (1/2/3/4/5): "))
+                choice=int(input("\n1. Buy Items\n2. Check Cart\n3. Check Order History\n4. See Account Details\n5. Delete Account\n6. LogOut\n\nEnter your choice (1/2/3/4/5/6): "))
                 if choice==1:
                     self.show_products()
                 elif choice==2:
@@ -121,14 +149,17 @@ class BlinkitCustomer:
                 elif choice==3:
                     self.order_history()
                 elif choice==4:
-                    self.customer_details()
+                    self.customer_details(userdata)
                 elif choice==5:
+                    deleted=self.delete_acc(userdata)
+                    if deleted:
+                        return
+                elif choice==6:
                     return
                 else:
-                    print("Wrong input, select either 1/2/3/4/5")
+                    print("Wrong input, select either 1/2/3/4/5/6")
             except Exception as msg:
                 print(f"Error: {msg}\nPlease give proper input...")
-
 
 
 def start_app() -> None:
@@ -136,18 +167,14 @@ def start_app() -> None:
     while True:
         try:
             print("\n_____________________________________BlinkIt___________________________________")
-            opt = int(input((f"\n1. SignUp\n2. SignIn\n3. Delete Account\n4. Exit\n\nEnter your option (1/2/3/4): ")))
+            opt = int(input((f"\n1. SignUp\n2. SignIn\n3. Exit\n\nEnter your option (1/2/3): ")))
             if opt == 1:
                 customer.customer_signup()
             elif opt == 2:
-                login = customer.customer_signin()
-                if login:
-                    customer.blinkit_home()
-                else:
-                    start_app()
+                userdata = customer.customer_signin()
+                if userdata:
+                    customer.blinkit_home(userdata)
             elif opt == 3:
-                customer.delete_acc()
-            elif opt==4:
                 break
             else:
                 print("Wrong input, select either 1/2/3")
