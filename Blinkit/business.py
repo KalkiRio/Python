@@ -1,4 +1,3 @@
-import random
 import captcha
 import time
 import hashlib
@@ -23,17 +22,18 @@ class BlinkitBusiness:
 
     def show_products(self):
         pass
-    def business_admin_details(self,userdata):
-        print("\n_________________________________BlinkIt Business_______________________________")
-        print(f"\nUsername: {userdata[-3]}\nName: {userdata[1]}\nPhone number: {userdata[3]}\nEmail: {userdata[2]}")
-        print(f"Address: {userdata[-2]}\nBusiness Name: {userdata[-4]}\nBusiness Id: {userdata[4]}")
-        time.sleep(2)
     def add_products(self):
         pass
     def remove_products(self):
         pass
     def update_products(self):
         pass
+
+    def business_admin_details(self,userdata):
+        print("\n_________________________________BlinkIt Business_______________________________")
+        print(f"\nUsername: {userdata[-3]}\nName: {userdata[1]}\nPhone number: {userdata[3]}\nEmail: {userdata[2]}")
+        print(f"Address: {userdata[-2]}\nBusiness Name: {userdata[-4]}\nBusiness Id: {userdata[4]}")
+        time.sleep(2)
 
     def business_admin_login(self)->tuple|None:
         print("\n_________________________________BlinkIt Business_______________________________")
