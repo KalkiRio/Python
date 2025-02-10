@@ -43,6 +43,8 @@ class BlinkitCustomer:
             while True:
                 print("\n_______________________________________________________________________________")
                 order=input(f"\nEnter the item you want to buy: ").lower()
+                if not order:
+                    break
                 item_found=False
                 for item in products:
                     if order==item[1]:
