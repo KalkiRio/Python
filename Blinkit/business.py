@@ -22,8 +22,42 @@ class BlinkitBusiness:
 
     def show_products(self):
         pass
-    def add_products(self):
-        pass
+    def add_products(self,userdata):
+        print("\n_________________________________BlinkIt Business_______________________________")
+        while True:
+            try:
+                p_name=input(f"\nEnter Item name: ").lower()
+                if not p_name:
+                    print("Item name is Required")
+                    break
+                p_category=input("Enter product category: ").lower()
+                quantity=int(input("Enter product quantity: "))
+                if not quantity:
+                    print("Quantity is required")
+                    break
+                if quantity<=0:
+                    print("Enter proper Quantity")
+                    break
+                price=int(input("Enter the price of product per unit: "))
+                if not price:
+                    print("Price is required")
+                    break
+                if price<=0:
+                    print("Enter proper price in Positive number only")
+                    break
+                cur.execute(f"""insert into products(p_name,p_category,quantity,price,b_id) 
+                            values('{p_name}','{p_category}',{quantity},{price},'{userdata[4]}')""")
+                conn.commit()
+                more=input("do you want to enter more items? (enter Y for yes): ").lower()
+                if more!='y':
+                    break
+            except ValueError as msg:
+                print(f"Error: Invalid input. {msg}")
+                break
+            except pymysql.MySQLError as msg:
+                print(f"Error: {msg}")
+                break
+
     def remove_products(self):
         pass
     def update_products(self):
@@ -50,13 +84,12 @@ class BlinkitBusiness:
 
         try:
             cur.execute(f"""select * from b_admin WHERE username = '{username}' AND passwd = '{hashed_password}'""")
-            user = cur.fetchone()
-            if user:
+            userdata = cur.fetchone()
+            if userdata:
                 print("Login successful!")
-                return user
-            else:
-                print("Invalid username or password.")
-                return
+                return userdata
+            print("Invalid username or password.")
+            return
         except pymysql.MySQLError as msg:
             print(f"Error: {msg}")
             return
@@ -150,7 +183,7 @@ class BlinkitBusiness:
                 if choice==1:
                     self.show_products()
                 elif choice==2:
-                    self.order_cart()
+                    self.add_products(userdata)
                 elif choice==3:
                     self.order_history()
                 elif choice==4:

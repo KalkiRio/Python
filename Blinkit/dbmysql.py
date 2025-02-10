@@ -36,12 +36,15 @@ cur.execute("""create table if not exists products(pid int primary key auto_incr
             foreign key (b_id) references b_admin(b_id) on delete cascade) auto_increment=1001""")
 
 
-# cur.execute("""create table if not exists cart(order_id int primary key auto_increment,
-#             p_name varchar(25) not null,
-#             pid int,
-#             uid int,
-#             quantity int not null,
-#             price int not null,
-#             b_id varchar(6),
-#             ) auto_increment=10001""")
+cur.execute("""create table if not exists cart(order_id int primary key auto_increment,
+            pid int,
+            uid int,
+            p_name varchar(25) not null,
+            quantity int not null,
+            price int not null,
+            b_id varchar(6),
+            b_name varchar(20),
+            foreign key (pid) references products(pid) on delete cascade,
+            foreign key (uid) references users(uid) on delete cascade,
+            foreign key (b_id) references b_admin(b_id) on delete cascade) auto_increment=10001""")
 

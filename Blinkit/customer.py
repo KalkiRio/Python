@@ -16,6 +16,7 @@ def rcaptcha()->bool|None:
     if not attempts:
         print("Register Again")
         return
+
 class BlinkitCustomer:
 
     def checkout(self):
@@ -27,13 +28,43 @@ class BlinkitCustomer:
     def order_history(self):
         print("\n_____________________________________BlinkIt___________________________________")
 
-    def show_products(self):
+    def buy_items(self,userdata):
+        print("\n_____________________________________BlinkIt___________________________________")
         print("\nDelivery in 8 minutes")
+        print("\nProducts available\n")
         try:
-            cur.execute("""select p.pid,p.p_name,p.price,p.p_category,p.quantity,b.b_name,b.email,b.phone
+            cur.execute("""select p.pid,p.p_name,p.price,p.p_category,p.quantity,b.b_name,b.email,b.phone,b.b_id
             from products p join b_admin b
-            on p.b_id=b.b_id""")
-            # products={i[0]:i[1:] for i in cur.fetchall()}
+            on p.b_id=b.b_id order by p.p_category""")
+            products = cur.fetchall()
+            for item in products:
+                print(f"Item name: {item[1]}\tCategory: {item[3]}\tPrice: {item[2]}\tAvailable Quantity: {item[4]}\tSeller: {item[5]}")
+            time.sleep(3)
+            while True:
+                print("\n_______________________________________________________________________________")
+                order=input(f"\nEnter the item you want to buy: ").lower()
+                item_found=False
+                for item in products:
+                    if order==item[1]:
+                        item_found=True
+                        quan=int(input("Enter the quantity: "))
+                        if item[4]-quan>=0:
+                            cur.execute(f"""insert into cart (pid,uid,p_name,quantity,price,b_id,b_name) 
+                                        values({item[0]},{userdata[0]},'{order}',{quan},{item[2]*quan},'{item[-1]}','{item[5]}')""")
+                            conn.commit()
+                            print(f"{quan} units of {order} added to your cart with total price {item[2]*quan}")
+                            time.sleep(3)
+                        else:
+                            print(f"Insufficient items for {order}")
+                        break
+                if not item_found:
+                    print(f"Item {order} not found.")
+                opt=input("Do you want to buy another item? (Y for yes): ").lower()
+                if opt!='y':
+                    cart=input("Go to cart? (Y for yes): ").lower()
+                    if cart!='y':
+                        break
+                    self.order_cart(userdata)
         except Exception as msg:
             print(f"Error: {msg}")
 
@@ -143,11 +174,11 @@ class BlinkitCustomer:
                 print("\n_____________________________________BlinkIt___________________________________")
                 choice=int(input("\n1. Buy Items\n2. Check Cart\n3. Check Order History\n4. See Account Details\n5. Delete Account\n6. LogOut\n\nEnter your choice (1/2/3/4/5/6): "))
                 if choice==1:
-                    self.show_products()
+                    self.buy_items(userdata)
                 elif choice==2:
-                    self.order_cart()
+                    self.order_cart(userdata)
                 elif choice==3:
-                    self.order_history()
+                    self.order_history(userdata)
                 elif choice==4:
                     self.customer_details(userdata)
                 elif choice==5:
