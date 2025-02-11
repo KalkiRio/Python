@@ -28,47 +28,59 @@ class BlinkitCustomer:
     def order_history(self):
         print("\n_____________________________________BlinkIt___________________________________")
 
-    def buy_items(self,userdata):
+    def buy_items(self, userdata) -> None:
         print("\n_____________________________________BlinkIt___________________________________")
         print("\nDelivery in 8 minutes")
         print("\nProducts available\n")
         try:
-            cur.execute("""select p.pid,p.p_name,p.price,p.p_category,p.quantity,b.b_name,b.email,b.phone,b.b_id
-            from products p join b_admin b
-            on p.b_id=b.b_id order by p.p_category""")
+            cur.execute("""SELECT p.pid, p.p_name, p.price, p.p_category, p.quantity, b.b_name, b.email, b.phone, b.b_id
+                        FROM products p
+                        JOIN b_admin b ON p.b_id = b.b_id
+                        ORDER BY p.p_category""")
             products = cur.fetchall()
             for item in products:
                 print(f"Item name: {item[1]}\tCategory: {item[3]}\tPrice: {item[2]}\tAvailable Quantity: {item[4]}\tSeller: {item[5]}")
             time.sleep(3)
             while True:
                 print("\n_______________________________________________________________________________")
-                order=input(f"\nEnter the item you want to buy: ").lower()
+                order = input(f"\nEnter the item you want to buy: ").lower()
                 if not order:
+                    print("See ya later...")
+                    time.sleep(1)
                     break
-                item_found=False
-                for item in products:
-                    if order==item[1]:
-                        item_found=True
-                        quan=int(input("Enter the quantity: "))
-                        if item[4]-quan>=0:
-                            cur.execute(f"""insert into cart (pid,uid,p_name,quantity,price,b_id,b_name) 
-                                        values({item[0]},{userdata[0]},'{order}',{quan},{item[2]*quan},'{item[-1]}','{item[5]}')""")
-                            conn.commit()
-                            print(f"{quan} units of {order} added to your cart with total price {item[2]*quan}")
-                            time.sleep(3)
-                        else:
-                            print(f"Insufficient items for {order}")
-                        break
+                item_found = False
+                matching_items = [item for item in products if order == item[1].lower()]
+                if matching_items:
+                    item_found = True
+                    print("\nAvailable options:")
+                    for i, item in enumerate(matching_items):
+                        print(f"{i + 1}. Seller: {item[5]}, Price: {item[2]}, Available Quantity: {item[4]}")
+                    choice = int(input("Choose the option number: ")) - 1
+                    selected_item = matching_items[choice]
+                    quan = int(input("Enter the quantity: "))
+
+                    cur.execute(f"""SELECT SUM(quantity) FROM cart WHERE pid = {selected_item[0]} AND uid = {userdata[0]}""")
+                    total_quantity_in_cart = cur.fetchone()[0] or 0
+
+                    if selected_item[4] - (total_quantity_in_cart + quan) >= 0:
+                        cur.execute(f"""INSERT INTO cart (pid, uid, p_name, quantity, price, b_id, b_name) 
+                                    VALUES ({selected_item[0]}, {userdata[0]}, '{order}', {quan}, {selected_item[2] * quan}, '{selected_item[-1]}', '{selected_item[5]}')""")
+                        conn.commit()
+                        print(f"{quan} units of {order} added to your cart with total price {selected_item[2] * quan}")
+                        time.sleep(3)
+                    else:
+                        print(f"Insufficient items for {order}")
                 if not item_found:
                     print(f"Item {order} not found.")
-                opt=input("Do you want to buy another item? (Y for yes): ").lower()
-                if opt!='y':
-                    cart=input("Go to cart? (Y for yes): ").lower()
-                    if cart!='y':
+                opt = input("Do you want to buy another item? (Y for yes): ").lower()
+                if opt != 'y':
+                    cart = input("Go to cart? (Y for yes): ").lower()
+                    if cart != 'y':
                         break
                     self.order_cart(userdata)
         except Exception as msg:
             print(f"Error: {msg}")
+
 
     def customer_signup(self)->None:
         print("\n_____________________________________BlinkIt___________________________________")
