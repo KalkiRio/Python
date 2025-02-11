@@ -19,11 +19,42 @@ def rcaptcha()->bool|None:
 
 class BlinkitCustomer:
 
-    def checkout(self):
+    def checkout(self,userdata):
         print("\n_____________________________________BlinkIt___________________________________")
 
-    def order_cart(self):
+    def order_cart(self,userdata):
         print("\n_____________________________________BlinkIt___________________________________")
+        try:
+            print("\nItems in your cart:\n")
+            cur.execute(f"""select * from cart where uid = {userdata[0]}""")
+            cart=cur.fetchall()
+            total_price=0
+            for i,item in enumerate(cart):
+                print(f"{i+1}. Order Id: {item[0]}, Product Id: {item[1]}, Item name: {item[3]}, Price: {item[5]}, Quantity: {item[4]}")
+                total_price+=item[5]
+            print(f"\nYour total Amount: {total_price}\n")
+            while True:
+                confirm=int(input("1. Go to Checkout\n2. Remove item from cart\n3. Go back\nEnter your choice (1/2/3): "))
+                if confirm==1:
+                    self.checkout(userdata)
+                    return
+                elif confirm==2:
+                    remove=input("Enter the name of product you want to remove: ")
+                    matching_items=[item for item in cart if remove==cart[3]]
+                    if matching_items:
+                        print("These (Item/Items) found in the cart: \n")
+                        for i,items in enumerate(matching_items):
+                            print(f"{i+1}. Order Id: {items[0]}, Product Id: {items[1]}, Item name: {items[3]}, Price: {items[5]}, Quantity: {items[4]}")
+                        sequence=int(input("Enter the Sequence number of item to remove: "))-1
+                        
+                    else:
+                        print("Enter proper item name")
+                elif confirm==3:
+                    return
+                else:
+                    print("Please enter proper choice!")
+        except Exception as msg:
+            print(f"Error: {msg}")
 
     def order_history(self):
         print("\n_____________________________________BlinkIt___________________________________")
