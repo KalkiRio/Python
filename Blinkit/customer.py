@@ -19,14 +19,14 @@ def rcaptcha()->bool|None:
 
 class BlinkitCustomer:
 
-    def checkout(self,userdata,cart):
+    def checkout(self,userdata,cart)->None:
         print("\n_____________________________________BlinkIt___________________________________")
         try:
             while True:
-                print("Your ordered items are: ")
+                print("\nYour ordered items are: ")
                 total_price=0
                 for i,item in enumerate(cart):
-                    print(f"{i+1}. Order Id: {item[0]}, Product Id: {item[1]}, Item name: {item[3]}, Price: {item[5]}, Quantity: {item[4]}")
+                    print(f"{i+1}. Order Id: {item[0]} | Product Id: {item[1]} | Item name: {item[3]} | Price: {item[5]} | Quantity: {item[4]}")
                     total_price+=item[5]
                 print(f"\nYour total Amount: {total_price}\n")
                 payment=int(input("1. UPI\n2. Cash on delivery\n3. Quit payment menu\nEnter your choice (1/2/3): "))
@@ -47,6 +47,9 @@ class BlinkitCustomer:
                     if not upi:
                         print("upi id is required")
                         continue
+                    if len(upi)<6:
+                        print("upi id should at least be 6 digits")
+                        continue
                     pin=int(input("Enter your 6 digit pin number: "))
                     if not pin:
                         print("pin is required to process payment.")
@@ -63,7 +66,6 @@ class BlinkitCustomer:
                     print(f"Thank You for your patronage.")
                     time.sleep(1)
                     payment_success=True
-                
                 else:
                     print("Enter a valid choice")
                 if not payment_success:
@@ -92,7 +94,7 @@ class BlinkitCustomer:
                 cart=cur.fetchall()
                 total_price=0
                 for i,item in enumerate(cart):
-                    print(f"{i+1}. Order Id: {item[0]}, Product Id: {item[1]}, Item name: {item[3]}, Price: {item[5]}, Quantity: {item[4]}")
+                    print(f"{i+1}. Order Id: {item[0]} | Product Id: {item[1]} | Item name: {item[3]} | Price: {item[5]} | Quantity: {item[4]}")
                     total_price+=item[5]
                 print(f"\nYour total Amount: {total_price}\n")
                 confirm=int(input("1. Go to Checkout\n2. Remove item from cart\n3. Go back to main menu\nEnter your choice (1/2/3): "))
@@ -110,7 +112,7 @@ class BlinkitCustomer:
                     if matching_items:
                         print("These (Item/Items) found in the cart: \n")
                         for i,items in enumerate(matching_items):
-                            print(f"{i+1}. Order Id: {items[0]}, Product Id: {items[1]}, Item name: {items[3]}, Price: {items[5]}, Quantity: {items[4]}")
+                            print(f"{i+1}. Order Id: {items[0]} | Product Id: {items[1]} | Item name: {items[3]} | Price: {items[5]} | Quantity: {items[4]}")
                         sequence=int(input("Enter the Sequence number of item to remove: "))-1
                         selected=matching_items[sequence]
                         cur.execute(f"""delete from cart where order_id = {selected[0]} and uid ={selected[2]}""")
@@ -125,8 +127,16 @@ class BlinkitCustomer:
         except Exception as msg:
             print(f"Error: {msg}")
 
-    def order_history(self):
+    def order_history(self,userdata)->None:
         print("\n_____________________________________BlinkIt___________________________________")
+        print("\nYour Previous orders are: ")
+        cur.execute(f"""select order_id, p_name, pid, quantity, price, b_name from order_hist where uid={userdata[0]}""")
+        history=cur.fetchall()
+        if not history:
+            print("As empty as Void...")
+        for hist in history:
+            print(f"Order id: {hist[0]} | Item: {hist[1]} | product id: {hist[2]} | Quantity: {hist[3]} | Price: {hist[4]} | Seller: {hist[5]}")
+        time.sleep(2)
 
     def buy_items(self, userdata) -> None:
         print("\n_____________________________________BlinkIt___________________________________")
@@ -154,7 +164,7 @@ class BlinkitCustomer:
                     item_found = True
                     print("\nAvailable options:")
                     for i, item in enumerate(matching_items):
-                        print(f"{i + 1}. Seller: {item[5]}, Price: {item[2]}, Available Quantity: {item[4]}")
+                        print(f"{i + 1}. Seller: {item[5]} | Price: {item[2]} | Available Quantity: {item[4]}")
                     choice = int(input("Choose the option number: ")) - 1
                     if choice<0:
                         print("Please enter a proper option number")
