@@ -92,6 +92,8 @@ class BlinkitCustomer:
                 print("\nItems in your cart:\n")
                 cur.execute(f"""select * from cart where uid = {userdata[0]}""")
                 cart=cur.fetchall()
+                if not cart:
+                    print("Cart is as empty as Void...")
                 total_price=0
                 for i,item in enumerate(cart):
                     print(f"{i+1}. Order Id: {item[0]} | Product Id: {item[1]} | Item name: {item[3]} | Price: {item[5]} | Quantity: {item[4]}")
@@ -151,7 +153,7 @@ class BlinkitCustomer:
                             ORDER BY p.p_category""")
                 products = cur.fetchall()
                 for item in products:
-                    print(f"Item name: {item[1]}\tCategory: {item[3]}\tPrice: {item[2]}\tAvailable Quantity: {item[4]}\tSeller: {item[5]}")
+                    print(f"Item name: {item[1]} | Category: {item[3]} | Price: {item[2]} | Available Quantity: {item[4]} | Seller: {item[5]}")
                 print("\n_______________________________________________________________________________")
                 order = input(f"\nEnter the item you want to buy: ").lower()
                 if not order:

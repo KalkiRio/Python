@@ -181,11 +181,11 @@ class BlinkitBusiness:
                 print("\n_________________________________BlinkIt Business_______________________________")
                 choice=int(input("\n1. Show Items\n2. Add new Item\n3. Update Item\n4. See Account Details\n5. Delete Account\n6. LogOut\n\nEnter your choice (1/2/3/4/5/6): "))
                 if choice==1:
-                    self.show_products()
+                    self.show_products(userdata)
                 elif choice==2:
                     self.add_products(userdata)
                 elif choice==3:
-                    self.order_history()
+                    self.update_products(userdata)
                 elif choice==4:
                     self.business_admin_details(userdata)
                 elif choice==5:
