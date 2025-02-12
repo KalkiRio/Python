@@ -19,38 +19,107 @@ def rcaptcha()->bool|None:
 
 class BlinkitCustomer:
 
-    def checkout(self,userdata):
-        print("\n_____________________________________BlinkIt___________________________________")
-
-    def order_cart(self,userdata):
+    def checkout(self,userdata,cart):
         print("\n_____________________________________BlinkIt___________________________________")
         try:
-            print("\nItems in your cart:\n")
-            cur.execute(f"""select * from cart where uid = {userdata[0]}""")
-            cart=cur.fetchall()
-            total_price=0
-            for i,item in enumerate(cart):
-                print(f"{i+1}. Order Id: {item[0]}, Product Id: {item[1]}, Item name: {item[3]}, Price: {item[5]}, Quantity: {item[4]}")
-                total_price+=item[5]
-            print(f"\nYour total Amount: {total_price}\n")
             while True:
-                confirm=int(input("1. Go to Checkout\n2. Remove item from cart\n3. Go back\nEnter your choice (1/2/3): "))
+                print("Your ordered items are: ")
+                total_price=0
+                for i,item in enumerate(cart):
+                    print(f"{i+1}. Order Id: {item[0]}, Product Id: {item[1]}, Item name: {item[3]}, Price: {item[5]}, Quantity: {item[4]}")
+                    total_price+=item[5]
+                print(f"\nYour total Amount: {total_price}\n")
+                payment=int(input("1. UPI\n2. Cash on delivery\n3. Quit payment menu\nEnter your choice (1/2/3): "))
+                payment_success=False
+                if payment==3:
+                    print("See ya later....")
+                    time.sleep(1)
+                    break
+                if not userdata[-2]:
+                    print("\nYou have not added address for delivery (Required).")
+                    address=input("Enter your address: ")
+                    if not address:
+                        continue
+                    cur.execute(f"""update users set address='{address}' where uid={userdata[0]}""")
+                    conn.commit()
+                elif payment==1:
+                    upi=input("Enter your upi id: ")
+                    if not upi:
+                        print("upi id is required")
+                        continue
+                    pin=int(input("Enter your 6 digit pin number: "))
+                    if not pin:
+                        print("pin is required to process payment.")
+                        continue
+                    if len(str(pin))!=6:
+                        print("Entered Pin is not 6 digits")
+                        continue
+                    time.sleep(2)
+                    print("Payment Successful")
+                    print(f"Thank You for your patronage.")
+                    time.sleep(1)
+                    payment_success=True
+                elif payment==2:
+                    print(f"Thank You for your patronage.")
+                    time.sleep(1)
+                    payment_success=True
+                
+                else:
+                    print("Enter a valid choice")
+                if not payment_success:
+                    print("Try different payment method or Quit.")
+                    continue
+
+                for item in cart:
+                    cur.execute(f"""insert into order_hist 
+                                values({item[0]},{item[1]},{item[2]},'{item[3]}',{item[4]},{item[5]},'{item[6]}','{item[7]}')""")
+                    cur.execute(f"""update products set quantity = (quantity-{item[4]}) where pid={item[1]}""")
+                    conn.commit()
+                print("Items soon to be delivered...")
+                time.sleep(1)
+                cur.execute(f"""delete from cart where uid={userdata[0]}""")
+                conn.commit()
+                break
+        except Exception as msg:
+            print(f"Error: {msg}")
+
+    def order_cart(self,userdata)->None:
+        print("\n_____________________________________BlinkIt___________________________________")
+        try:
+            while True:
+                print("\nItems in your cart:\n")
+                cur.execute(f"""select * from cart where uid = {userdata[0]}""")
+                cart=cur.fetchall()
+                total_price=0
+                for i,item in enumerate(cart):
+                    print(f"{i+1}. Order Id: {item[0]}, Product Id: {item[1]}, Item name: {item[3]}, Price: {item[5]}, Quantity: {item[4]}")
+                    total_price+=item[5]
+                print(f"\nYour total Amount: {total_price}\n")
+                confirm=int(input("1. Go to Checkout\n2. Remove item from cart\n3. Go back to main menu\nEnter your choice (1/2/3): "))
                 if confirm==1:
-                    self.checkout(userdata)
-                    return
+                    if not cart:
+                        print("No items in your cart, can't go to checkout.")
+                        time.sleep(1)
+                        break
+                    else:
+                        self.checkout(userdata,cart)
+                        break
                 elif confirm==2:
-                    remove=input("Enter the name of product you want to remove: ")
-                    matching_items=[item for item in cart if remove==cart[3]]
+                    remove=input("Enter the name of product you want to remove: ").lower()
+                    matching_items=[item for item in cart if item[3]==remove]
                     if matching_items:
                         print("These (Item/Items) found in the cart: \n")
                         for i,items in enumerate(matching_items):
                             print(f"{i+1}. Order Id: {items[0]}, Product Id: {items[1]}, Item name: {items[3]}, Price: {items[5]}, Quantity: {items[4]}")
                         sequence=int(input("Enter the Sequence number of item to remove: "))-1
-                        
+                        selected=matching_items[sequence]
+                        cur.execute(f"""delete from cart where order_id = {selected[0]} and uid ={selected[2]}""")
+                        conn.commit()
+                        print("\nItems removed from cart successfully")
                     else:
                         print("Enter proper item name")
                 elif confirm==3:
-                    return
+                    break
                 else:
                     print("Please enter proper choice!")
         except Exception as msg:
@@ -64,15 +133,15 @@ class BlinkitCustomer:
         print("\nDelivery in 8 minutes")
         print("\nProducts available\n")
         try:
-            cur.execute("""SELECT p.pid, p.p_name, p.price, p.p_category, p.quantity, b.b_name, b.email, b.phone, b.b_id
-                        FROM products p
-                        JOIN b_admin b ON p.b_id = b.b_id
-                        ORDER BY p.p_category""")
-            products = cur.fetchall()
-            for item in products:
-                print(f"Item name: {item[1]}\tCategory: {item[3]}\tPrice: {item[2]}\tAvailable Quantity: {item[4]}\tSeller: {item[5]}")
-            time.sleep(3)
             while True:
+                print()
+                cur.execute("""SELECT p.pid, p.p_name, p.price, p.p_category, p.quantity, b.b_name, b.email, b.phone, b.b_id
+                            FROM products p
+                            JOIN b_admin b ON p.b_id = b.b_id
+                            ORDER BY p.p_category""")
+                products = cur.fetchall()
+                for item in products:
+                    print(f"Item name: {item[1]}\tCategory: {item[3]}\tPrice: {item[2]}\tAvailable Quantity: {item[4]}\tSeller: {item[5]}")
                 print("\n_______________________________________________________________________________")
                 order = input(f"\nEnter the item you want to buy: ").lower()
                 if not order:
@@ -87,13 +156,18 @@ class BlinkitCustomer:
                     for i, item in enumerate(matching_items):
                         print(f"{i + 1}. Seller: {item[5]}, Price: {item[2]}, Available Quantity: {item[4]}")
                     choice = int(input("Choose the option number: ")) - 1
+                    if choice<0:
+                        print("Please enter a proper option number")
+                        continue
                     selected_item = matching_items[choice]
                     quan = int(input("Enter the quantity: "))
-
+                    if quan<=0:
+                        print("Please enter quantity more than 0")
+                        continue
                     cur.execute(f"""SELECT SUM(quantity) FROM cart WHERE pid = {selected_item[0]} AND uid = {userdata[0]}""")
-                    total_quantity_in_cart = cur.fetchone()[0] or 0
+                    total_in_cart = cur.fetchone()[0] or 0
 
-                    if selected_item[4] - (total_quantity_in_cart + quan) >= 0:
+                    if selected_item[4] - (total_in_cart + quan) >= 0:
                         cur.execute(f"""INSERT INTO cart (pid, uid, p_name, quantity, price, b_id, b_name) 
                                     VALUES ({selected_item[0]}, {userdata[0]}, '{order}', {quan}, {selected_item[2] * quan}, '{selected_item[-1]}', '{selected_item[5]}')""")
                         conn.commit()
@@ -109,6 +183,7 @@ class BlinkitCustomer:
                     if cart != 'y':
                         break
                     self.order_cart(userdata)
+                    break
         except Exception as msg:
             print(f"Error: {msg}")
 
