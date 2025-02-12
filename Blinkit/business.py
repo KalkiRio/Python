@@ -20,8 +20,15 @@ def rcaptcha()->bool|None:
 
 class BlinkitBusiness:
 
-    def show_products(self):
-        pass
+    def show_products(self,userdata):
+        print("\n_________________________________BlinkIt Business_______________________________")
+        cur.execute(f"""select * from products where b_id = '{userdata[4]}'""")
+        products=cur.fetchall()
+        print("\nYour products are: ")
+        for item in products:
+            print(f"Item: {item[1]} | Category: {item[2]} | Quantity: {item[3]} | Price: {item[4]}")
+        time.sleep(2)
+
     def add_products(self,userdata):
         print("\n_________________________________BlinkIt Business_______________________________")
         while True:
@@ -58,10 +65,28 @@ class BlinkitBusiness:
                 print(f"Error: {msg}")
                 break
 
-    def remove_products(self):
-        pass
-    def update_products(self):
-        pass
+    def remove_products(self,userdata):
+        print("\n_________________________________BlinkIt Business_______________________________")
+
+    def update_products(self,userdata):
+        self.show_products(userdata)
+        try:
+            while True:
+                choice=int(input("What would you like to change:\n1. Item Name\n2. Product Category\n3. Quantity\n4. Price\n5. Quit\nEnter your choice(1/2/3/4/5): "))
+                if choice==1:
+                    pass
+                elif choice==2:
+                    pass
+                elif choice==3:
+                    pass
+                elif choice==4:
+                    pass
+                elif choice==5:
+                    break
+                else:
+                    print("Invalid choice!")
+        except Exception as msg:
+            print(f"Error: {msg}")
 
     def business_admin_details(self,userdata):
         print("\n_________________________________BlinkIt Business_______________________________")
