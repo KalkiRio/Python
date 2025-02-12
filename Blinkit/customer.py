@@ -19,7 +19,7 @@ def rcaptcha()->bool|None:
 
 class BlinkitCustomer:
 
-    def checkout(self,userdata,cart)->None:
+    def checkout(self, userdata: tuple, cart: tuple)->None:
         print("\n_____________________________________BlinkIt___________________________________")
         try:
             while True:
@@ -85,7 +85,7 @@ class BlinkitCustomer:
         except Exception as msg:
             print(f"Error: {msg}")
 
-    def order_cart(self,userdata)->None:
+    def order_cart(self,userdata:tuple)->None:
         print("\n_____________________________________BlinkIt___________________________________")
         try:
             while True:
@@ -127,7 +127,7 @@ class BlinkitCustomer:
         except Exception as msg:
             print(f"Error: {msg}")
 
-    def order_history(self,userdata)->None:
+    def order_history(self,userdata:tuple)->None:
         print("\n_____________________________________BlinkIt___________________________________")
         print("\nYour Previous orders are: ")
         cur.execute(f"""select order_id, p_name, pid, quantity, price, b_name from order_hist where uid={userdata[0]}""")
@@ -138,7 +138,7 @@ class BlinkitCustomer:
             print(f"Order id: {hist[0]} | Item: {hist[1]} | product id: {hist[2]} | Quantity: {hist[3]} | Price: {hist[4]} | Seller: {hist[5]}")
         time.sleep(2)
 
-    def buy_items(self, userdata) -> None:
+    def buy_items(self, userdata:tuple) -> None:
         print("\n_____________________________________BlinkIt___________________________________")
         print("\nDelivery in 8 minutes")
         print("\nProducts available\n")
@@ -270,7 +270,7 @@ class BlinkitCustomer:
             return
 
 
-    def delete_acc(self,userdata)->bool|None:
+    def delete_acc(self,userdata:tuple)->bool|None:
         print("\n_____________________________________BlinkIt___________________________________")
         confirm=input("\nDo you really want to delete your account?\n(y/n): ").lower()
         if confirm=='y':
