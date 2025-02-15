@@ -65,26 +65,69 @@ class BlinkitBusiness:
                 print(f"Error: {msg}")
                 break
 
-    def remove_products(self,userdata):
+    def remove_products(self, userdata):
         print("\n_________________________________BlinkIt Business_______________________________")
-
-    def update_products(self,userdata):
-        self.show_products(userdata)
         try:
+            cur.execute(f"""SELECT * FROM products WHERE b_id = '{userdata[4]}'""")
+            products = cur.fetchall()
+            print("\nYour products are: ")
+            for item in products:
+                print(f"Item: {item[1]} | Category: {item[2]} | Quantity: {item[3]} | Price: {item[4]}")
+            time.sleep(1)
             while True:
-                choice=int(input("What would you like to change:\n1. Item Name\n2. Product Category\n3. Quantity\n4. Price\n5. Quit\nEnter your choice(1/2/3/4/5): "))
-                if choice==1:
-                    pass
-                elif choice==2:
-                    pass
-                elif choice==3:
-                    pass
-                elif choice==4:
-                    pass
-                elif choice==5:
+                item_name = input("Enter the item name you want to remove (or type 'q' to exit): ").lower()
+                if item_name == 'q':
                     break
-                else:
-                    print("Invalid choice!")
+                items_to_remove = [item for item in products if item_name == item[1]]
+                if not items_to_remove:
+                    print(f"No items found with the name {item_name}.")
+                    continue
+                for item in items_to_remove:
+                    print(f"Removing Item: {item[1]} | Category: {item[2]} | Quantity: {item[3]} | Price: {item[4]}")
+                    cur.execute(f"""DELETE FROM products WHERE pid = {item[0]}""")
+                conn.commit()
+                print(f"Item(s) {item_name} removed successfully.")
+                time.sleep(1)
+        except Exception as msg:
+            print(f"Error: {msg}")
+
+    def update_products(self, userdata):
+        print("\n_________________________________BlinkIt Business_______________________________")
+        try:
+            cur.execute(f"""SELECT * FROM products WHERE b_id = '{userdata[4]}'""")
+            products = cur.fetchall()
+            print("\nYour products are: ")
+            for item in products:
+                print(f"Item: {item[1]} | Category: {item[2]} | Quantity: {item[3]} | Price: {item[4]}")
+            time.sleep(1)
+            while True:
+                choice = int(input("What would you like to change:\n1. Item Name\n2. Product Category\n3. Quantity\n4. Price\n5. Quit\nEnter your choice (1/2/3/4/5): "))
+                if choice == 5:
+                    break
+                item_name = input("Enter the item name you want to update: ")
+                items_to_update = [item for item in products if item_name == item[1]]
+                if not items_to_update:
+                    print(f"No items found with the name {item_name}.")
+                    continue
+                for item in items_to_update:
+                    if choice == 1:
+                        new_name = input("Enter the new item name: ")
+                        cur.execute(f"""UPDATE products SET p_name = '{new_name}' WHERE pid = {item[0]}""")
+                    elif choice == 2:
+                        new_category = input("Enter the new product category: ")
+                        cur.execute(f"""UPDATE products SET p_category = '{new_category}' WHERE pid = {item[0]}""")
+                    elif choice == 3:
+                        new_quantity = int(input("Enter the new quantity: "))
+                        cur.execute(f"""UPDATE products SET quantity = {new_quantity} WHERE pid = {item[0]}""")
+                    elif choice == 4:
+                        new_price = float(input("Enter the new price: "))
+                        cur.execute(f"""UPDATE products SET price = {new_price} WHERE pid = {item[0]}""")
+                    else:
+                        print("Invalid choice. Please try again.")
+                        continue
+                conn.commit()
+                print(f"Item(s) {item_name} updated successfully.")
+                time.sleep(1)
         except Exception as msg:
             print(f"Error: {msg}")
 
@@ -204,7 +247,7 @@ class BlinkitBusiness:
         while True:
             try:
                 print("\n_________________________________BlinkIt Business_______________________________")
-                choice=int(input("\n1. Show Items\n2. Add new Item\n3. Update Item\n4. See Account Details\n5. Delete Account\n6. LogOut\n\nEnter your choice (1/2/3/4/5/6): "))
+                choice=int(input("\n1. Show Items\n2. Add new Item\n3. Update Item\n4. Remove Item\n5. See Account Details\n6. Delete Account\n7. LogOut\n\nEnter your choice (1/2/3/4/5/6): "))
                 if choice==1:
                     self.show_products(userdata)
                 elif choice==2:
@@ -212,15 +255,17 @@ class BlinkitBusiness:
                 elif choice==3:
                     self.update_products(userdata)
                 elif choice==4:
-                    self.business_admin_details(userdata)
+                    self.remove_products(userdata)
                 elif choice==5:
+                    self.business_admin_details(userdata)
+                elif choice==6:
                     deleted=self.delete_acc(userdata)
                     if deleted:
                         return
-                elif choice==6:
+                elif choice==7:
                     return
                 else:
-                    print("Wrong input, select either 1/2/3/4/5/6")
+                    print("Wrong input, select either 1/2/3/4/5/6/7")
             except Exception as msg:
                 print(f"Error: {msg}\nPlease give proper input...")
 
