@@ -20,7 +20,7 @@ def rcaptcha()->bool|None:
 
 class BlinkitBusiness:
 
-    def show_products(self,userdata):
+    def show_products(self,userdata:tuple)->None:
         print("\n_________________________________BlinkIt Business_______________________________")
         cur.execute(f"""select * from products where b_id = '{userdata[4]}'""")
         products=cur.fetchall()
@@ -29,7 +29,7 @@ class BlinkitBusiness:
             print(f"Item: {item[1]} | Category: {item[2]} | Quantity: {item[3]} | Price: {item[4]}")
         time.sleep(2)
 
-    def add_products(self,userdata):
+    def add_products(self,userdata:tuple)->None:
         print("\n_________________________________BlinkIt Business_______________________________")
         while True:
             try:
@@ -65,7 +65,7 @@ class BlinkitBusiness:
                 print(f"Error: {msg}")
                 break
 
-    def remove_products(self, userdata):
+    def remove_products(self, userdata: tuple)->None:
         print("\n_________________________________BlinkIt Business_______________________________")
         try:
             cur.execute(f"""SELECT * FROM products WHERE b_id = '{userdata[4]}'""")
@@ -91,7 +91,7 @@ class BlinkitBusiness:
         except Exception as msg:
             print(f"Error: {msg}")
 
-    def update_products(self, userdata):
+    def update_products(self, userdata:tuple)->None:
         print("\n_________________________________BlinkIt Business_______________________________")
         try:
             cur.execute(f"""SELECT * FROM products WHERE b_id = '{userdata[4]}'""")
@@ -131,7 +131,7 @@ class BlinkitBusiness:
         except Exception as msg:
             print(f"Error: {msg}")
 
-    def business_admin_details(self,userdata):
+    def business_admin_details(self,userdata:tuple)->None:
         print("\n_________________________________BlinkIt Business_______________________________")
         print(f"\nUsername: {userdata[-3]}\nName: {userdata[1]}\nPhone number: {userdata[3]}\nEmail: {userdata[2]}")
         print(f"Address: {userdata[-2]}\nBusiness Name: {userdata[-4]}\nBusiness Id: {userdata[4]}")
@@ -215,7 +215,7 @@ class BlinkitBusiness:
         except pymysql.MySQLError as msg:
             print(f"Error: {msg}")
 
-    def delete_acc(self,userdata)->bool|None:
+    def delete_acc(self,userdata:tuple)->bool|None:
         print("\n_________________________________BlinkIt Business_______________________________")
         confirm=input("\nDo you really want to delete your account?\n(y/n): ").lower()
         if confirm=='y':
