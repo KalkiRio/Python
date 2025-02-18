@@ -247,7 +247,7 @@ class BlinkitBusiness:
         while True:
             try:
                 print("\n_________________________________BlinkIt Business_______________________________")
-                choice=int(input("\n1. Show Items\n2. Add new Item\n3. Update Item\n4. Remove Item\n5. See Account Details\n6. Delete Account\n7. LogOut\n\nEnter your choice (1/2/3/4/5/6): "))
+                choice=int(input("\n1. Show Items\n2. Add new Item\n3. Update Item\n4. Remove Item\n5. See Account Details\n6. Delete Account\n7. LogOut\n\nEnter your choice (1/2/3/4/5/6/7): "))
                 if choice==1:
                     self.show_products(userdata)
                 elif choice==2:

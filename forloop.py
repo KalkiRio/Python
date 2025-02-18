@@ -510,3 +510,10 @@
 #     if i[0] not in d2:
 #         d2[i[0]]=vowels
 # print(d2)
+
+s='A1B2C3D4'
+s2=''
+for i in s:
+    
+
+
