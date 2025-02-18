@@ -260,3 +260,23 @@
 #         s+=word+' '
 #     i+=1
 # print(s)
+
+#Q
+s='A1B2C3D4'
+"""o/p: D4C3B2A1"""
+# i=len(s)-1
+# j=len(s)-2
+# while i>=0 and j>=0:
+#     print(s[j],s[i],sep='',end='')
+#     j-=2
+#     i-=2
+
+#Q
+s='A1B2C3D4'
+"""o/p: D1C2B3A4"""
+# num=1
+# char=len(s)-2
+# while num<len(s) and char>=0:
+#     print(s[char],s[num],sep='',end='')
+#     num+=2
+#     char-=2

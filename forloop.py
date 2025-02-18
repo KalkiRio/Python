@@ -511,9 +511,57 @@
 #         d2[i[0]]=vowels
 # print(d2)
 
+# Q
 s='A1B2C3D4'
-s2=''
-for i in s:
-    
+"""o/p: D4C3B2A1"""
+# s2=''
+# l=[]
+# for i in s:
+#     s2+=i
+#     if i.isdigit():
+#         l.append(s2)
+#         s2=''
+# print(''.join(l[::-1]))
+#or
+# s2=''
+# s3=''
+# for i in s:
+#     s2+=i
+#     if i.isdigit():
+#         s3=s2+s3
+#         s2=''
+# print(s3)
+#or
+# l=[i for i in s if i.isalpha()][::-1]
+# l2=[i for i in s if i.isdigit()][::-1]
+# for i,j in zip(l,l2):
+#     print(i,j,sep='',end='')
 
+#Q
+s='A1B2C3D4'
+"""o/p: D1C2B3A4"""
+# l=[]
+# l2=[]
+# for i in s:
+#     if i.isdigit():
+#         l2.append(i)
+#     else:
+#         l.append(i)
+# for i,j in zip(l[::-1],l2):
+#     print(i,j,sep='',end='')
+#or
+# l=[i for i in s if i.isalpha()][::-1]
+# l2=[i for i in s if i.isdigit()]
+# for i,j in zip(l,l2):
+#     print(i,j,sep='',end='')
 
+s="abc*ef/gh"
+"""o/p: hgf*ec/ba"""
+# d={}
+# for i,j in enumerate(s):
+#     if not j.isalnum():
+#         d[j]=i
+# rl=[i for i in s if i.isalnum()][::-1]
+# for i in d.items():
+#     rl.insert(i[1],i[0])
+# print(''.join(rl))
