@@ -64,12 +64,29 @@
 # print(d)
 
 #wap to build list of names ends with consonant from given collection take 
-names=['jatin','anshu','manish','nikita','nitin']
-#wap to build a list of numbers which are divisible by 5 from 1 to 100
-#wap to build a list of tuple string and its length pair only if the strings have even length.
-data=["elon musk","steve george","mark zukerberg","google","facebook"]
-#wap to check each item of the collection which is having only individual datatype values and add to the new set else reverse of item.
-data=[10,'alan',[10,20,30],True,10+2j]
-#waptobuild a dictionary of each letter and its ascii code only if the ascii code is odd number take string
-s='hello world'
-#wap to take a number and print it's divisors in a list.
+# names=['jatin','anshu','manish','nikita','nitin']
+# print([i for i in names if i[-1] not in 'aeiouAEIOU'])
+
+# #wap to build a list of numbers which are divisible by 5 from 1 to 100
+# print([i for i in range(1,101) if i%5==0])
+
+# #wap to build a list of tuple string and its length pair only if the strings have even length.
+# data=["elon musk","steve george","mark zukerberg","google","facebook"]
+# print([(i,len(i)) for i in data if len(i)%2==0])
+
+# #wap to check each item of the collection which is having only individual datatype values and add to the new set else reverse of item.
+# # data=[10,'alan',[10,20,30],True,10+2j] will give typerror as we can only pass immutables inside set,dict(keys) and we have a list here.
+# #     print({i if type(i) in (int, float, complex, bool) else i[::-1] for i in data})
+# #            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# # TypeError: unhashable type: 'list'
+# data=[10,'alan',(10,20,30),True,10+2j]
+# print({i if type(i) in (int, float, complex, bool) else i[::-1] for i in data})
+
+# #wap to build a dictionary of each letter and its ascii code only if the ascii code is odd number take string
+# s='hello world'
+# print({i:ord(i) for i in s if ord(i)%2==1})
+
+# #wap to take a number and print it's divisors in a list.
+# num=int(input("Enter a number: "))
+# print([i for i in range(1,num+1) if num%i==0])
+
