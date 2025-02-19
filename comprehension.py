@@ -30,8 +30,13 @@
 # s={i for i in range(1,21) if i%2==1}
 # print(s)
 
-s='hello'
-s2={(s[i],i) for i in range(len(s))}
-print(s2)
+# s='hello'
+# s2={(s[i],i) for i in range(len(s))}
+# print(s2)
 
+# dict comprehension: it is a process of creating a new dictionary by considering less lines of instructions.
+# syntax:
+# only for loop: var={key:value for var in collection}
+#for and if: var={key:value for var in collection if <condition>}
+#for if and else: var={key:value if <condition> else value for var in collection}
 
