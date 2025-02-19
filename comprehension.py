@@ -67,6 +67,7 @@
 names=['jatin','anshu','manish','nikita','nitin']
 #wap to build a list of numbers which are divisible by 5 from 1 to 100
 #wap to build a list of tuple string and its length pair only if the strings have even length.
+data=["elon musk","steve george","mark zukerberg","google","facebook"]
 #wap to check each item of the collection which is having only individual datatype values and add to the new set else reverse of item.
 data=[10,'alan',[10,20,30],True,10+2j]
 #waptobuild a dictionary of each letter and its ascii code only if the ascii code is odd number take string
