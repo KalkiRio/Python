@@ -100,8 +100,7 @@
 #         for i in nums:
 #             if i in hashset:
 #                 return True
-#             else:
-#                 hashset.add(i)
+#             hashset.add(i)
 #         return False
 # nums: int = [1,2,3,3]
 # answer=Solution()
@@ -262,3 +261,4 @@
 # n=int(input("enter a number: "))
 # for i in range(n):
 #     print(fib(i))
+
