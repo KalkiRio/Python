@@ -12,19 +12,20 @@
 #       """)
 
 
-# s="hello world how are you doing"
-#solution without using any method:
-# l=[]
-# s2=''
-# for i in s:
-#     if i==' ':
-#         l+=[s2]
-#         s2=''
-#     else:
-#         s2+=i
-# l+=[s2]
-# for i in l[::-1]:
-#     print(i, end=' ')
+s="hello world how are you doing"
+"""o/p: doing you are how world hello """
+# solution without using any method:
+l=[]
+s2=''
+for i in s:
+    if i==' ':
+        l+=[s2]
+        s2=''
+    else:
+        s2+=i
+l+=[s2]
+for i in l[::-1]:
+    print(i, end=' ')
 
 #solution using method:
 # l=s.split()
