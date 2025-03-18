@@ -86,7 +86,7 @@
 # s='hello world'
 # print({i:ord(i) for i in s if ord(i)%2==1})
 
-# #wap to take a number and print it's divisors in a list.
+# #wap to take a number and print its divisors in a list.
 # num=int(input("Enter a number: "))
 # print([i for i in range(1,num+1) if num%i==0])
 

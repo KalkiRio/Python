@@ -485,8 +485,20 @@ s="abc*ef/gh"
 # d={}
 # for i,j in enumerate(s):
 #     if not j.isalnum():
-#         d[j]=i
-# rl=[i for i in s if i.isalnum()][::-1]
+#         d[i]=j
+# r=[i for i in s if i.isalnum()][::-1]
 # for i in d.items():
-#     rl.insert(i[1],i[0])
-# print(''.join(rl))
+#     r.insert(i[0],i[1])
+# print("".join(r))
+
+# s="hjhkduehjhhfsjdhfgjsfyghfhdyyyyyyyyyyyygfeygjsgfhdgS"
+# d={}
+# for i in s:
+#     if i not in d:
+#         d[i]=1
+#     else:
+#         d[i]+=1
+# max_char=max(d,key=d.get)
+# print(max_char)
+
+

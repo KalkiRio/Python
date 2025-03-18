@@ -280,3 +280,4 @@ s='A1B2C3D4'
 #     print(s[char],s[num],sep='',end='')
 #     num+=2
 #     char-=2
+
