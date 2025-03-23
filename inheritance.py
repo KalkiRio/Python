@@ -189,8 +189,6 @@ class Child2(Parent):
     def begger(self):
         print("50k per month")
 
-
-
 class Child3(Parent):
     def engineer(self):
         print("Berozgar")
