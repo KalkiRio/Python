@@ -15,3 +15,14 @@
 # for i in range(3):
 #     print(l2[i],end='')
 
+# n=8
+# [0,1,2,3,4,5,6,7]
+# o/p: [[0,1,2],[3,4,5]]
+# n=8
+# l=[i for i in range(n)]
+# l2=[]
+# for i in range(0,len(l),3):
+#     l2.append(l[i:i+3])
+# if len(l2[-1])<3:
+#     l2.pop()
+# print(l2)
