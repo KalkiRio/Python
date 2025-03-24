@@ -26,3 +26,13 @@
 # if len(l2[-1])<3:
 #     l2.pop()
 # print(l2)
+
+# s="abbbcsadasssalkkdliehhgsjygddddddddddd"
+# l=list({(i,s.count(i)) for i in s})
+# max=l[0][1]
+# max_char=l[0][0]
+# for i in range(len(l)):
+#     if l[i][1]>max:
+#         max=l[i][1]
+#         max_char=l[i][0]
+# print(f"{max_char} is the most occurring character")
