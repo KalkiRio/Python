@@ -68,12 +68,12 @@
 #reverse a list
 # lst=[10,20,'hi','hello',True,50]
 # ol=[]
-# n=len(lst)
 # for i in lst:
 #     ol=[i]+ol
 # print(ol)
 
 #2nd solution:
+# n = len(lst)
 # for i in range (n//2):
 #     lst[i],lst[n-1-i]=lst[n-1-i],lst[i]
 # print(lst)

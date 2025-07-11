@@ -18,7 +18,7 @@ import csv
 #read the data
 
 # with open('demo.txt') as file:
-    # data = http://file.read()
+    # data = file.read()
     # print(data)
 #    data1 = file.readline()
 #    data2 = file.readline()
@@ -34,7 +34,7 @@ import csv
     # print(data)
 
 # with open('demo.txt') as file:
-#     data = http://file.read()
+#     data = file.read()
 #     count = 0
 #     for i in data.split():
 #         if i == 'python':
@@ -219,7 +219,6 @@ file.close()
 #     for i in data:
 #         out = i.split()
 #         print(out[1])
-
 
 
 # To open multiple file:

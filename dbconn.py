@@ -26,11 +26,11 @@ conn.commit()
 
 # delete_data()
 
-# def see_data():
-#     data=cur.execute("select * from student")
-#     # dataset = list(data)
-#     # print(dataset)
-#     for i in data:
-#         print(*i)
+def see_data():
+    data=cur.execute("select * from student")
+    # dataset = list(data)
+    # print(dataset)
+    for i in data:
+        print(*i)
 
-# see_data()
+see_data()
