@@ -42,14 +42,12 @@
 # Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We return [1, 2].
 #1st sol
 # num=[2,7,11,15]
-# m=1
 # target=9
 # for i in range(len(num)):
-#     for j in range(m,len(num)):
+#     for j in range(i+1,len(num)):
 #         if (num[i]+num[j])==target:
 #             print([i+1,j+1])
 #             break
-#     m+=1
 
 # num=[2,7,11,15]
 # target=9
