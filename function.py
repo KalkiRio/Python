@@ -31,13 +31,14 @@
 # num=int(input("enter a number to check for palindrome: "))
 # palindrome(num)
 
-#fibonacci
+# fibonacci
 # def fib(n):
 #     a,b=0,1
 #     for i in range(n):
 #         print(a, end=' ')
 #         a,b=b,a+b
 # fib(10)
+
 # r=int(input("enter no of rows:"))
 # for i in range(r):
 #     print(' '*(r-i-1),end =' ')

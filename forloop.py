@@ -160,6 +160,7 @@
 #             d2[key] = d[key]
 #         index -= 1
 # print(d2)
+
 #OR with methods
 # d={10:'a',20:'b',30:'c'}
 # d2={}
@@ -170,12 +171,13 @@
 # for i in l:
 #     d2[i[0]]=i[1]
 # print(d2)
+
 #OR with methods
 # d={10:'a',20:'b',30:'c'}
 # d2={}
 # l=list(d.items())
 # n=len(l)
-# for i in range(len(l)-1,-1,-1):
+# for i in range(n-1,-1,-1):
 #     d2[l[i][0]]=l[i][1]
 # print(d2)
 
@@ -272,13 +274,18 @@
 # for i in range(1,len(l1),2):
 #     l2.append(l1[i])
 # print(l2)
+#or
+# l1 = [i.split('.')[1] for i in l]
+# print(l1)
 
 #19
-# l=[10,20,30,40,50]
+l=[10,20,30,40,50]
 # s=''
 # for i in l:
 #     s=s+str(i)+' '
 # print(s)
+#or
+# print(" ".join(str(i) for i in l))
 
 #Q20
 # l='just looking like a wow'
@@ -352,16 +359,16 @@
 #         res+=f"{i}{c}"
 # print(res)
 
-##s='abcaabbsdabc'
-##target='abbs'
-##for i in range(len(s)-(len(target)+1)):
-##    found=True
-##    for j in range(len(target)):
-##        if s[i+j]!=target[j]:
-##            found=False
-##            break
-##    if found:
-##        print(i)
+# s='abcaabbsdabc'
+# target='abbs'
+# for i in range(len(s)-len(target)+1):
+#    found=True
+#    for j in range(len(target)):
+#        if s[i+j]!=target[j]:
+#            found=False
+#            break
+#    if found:
+#        print(i)
 
 #09/jan/2025
 #Q1
@@ -480,8 +487,8 @@ s='A1B2C3D4'
 # for i,j in zip(l,l2):
 #     print(i,j,sep='',end='')
 
-s="abc*ef/gh"
-"""o/p: hgf*ec/ba"""
+# s="abc*ef/gh"
+# """o/p: hgf*ec/ba"""
 # d={}
 # for i,j in enumerate(s):
 #     if not j.isalnum():
