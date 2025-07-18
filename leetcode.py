@@ -260,3 +260,60 @@
 # for i in range(n):
 #     print(fib(i))
 
+#roman to integer
+# class Solution:
+#     def romanToInt(self, s: str) -> int:
+#         roman_map = {
+#             'I' : 1,
+#             'V' : 5,
+#             'X' : 10,
+#             'L' : 50,
+#             'C' : 100,
+#             'D' : 500,
+#             'M' : 1000,
+#         }
+#         sum = 0
+#         value = 0
+#         for i in range(len(s)-1,-1,-1):
+#             if s[i] not in roman_map:
+#                 return "invalid roman number"
+#             if value > roman_map[s[i]]:
+#                 sum -= roman_map[s[i]]
+#                 value = roman_map[s[i]]
+#             else:
+#                 sum += roman_map[s[i]]
+#                 value = roman_map[s[i]]
+#         return sum
+
+# sol = Solution()
+# print(sol.romanToInt("MCMXCIV"))
+
+# # integer to roman
+# class Solution:
+#     def intToRoman(self, num: int) -> str:
+#         val_to_roman = [
+#             (1000, 'M'),
+#             (900, 'CM'),
+#             (500, 'D'),
+#             (400, 'CD'),
+#             (100, 'C'),
+#             (90, 'XC'),
+#             (50, 'L'),
+#             (40, 'XL'),
+#             (10, 'X'),
+#             (9, 'IX'),
+#             (5, 'V'),
+#             (4, 'IV'),
+#             (1, 'I')
+#         ]
+
+#         result = []
+#         for value, symbol in val_to_roman:
+#             while num >= value:
+#                 result.append(symbol)
+#                 num -= value
+#         return ''.join(result)
+
+# sol = Solution()
+# print(sol.intToRoman(1987))  # Output: MCMLXXXVII
+# print(sol.intToRoman(3999))  # Output: MMMCMXCIX
