@@ -317,3 +317,20 @@
 # sol = Solution()
 # print(sol.intToRoman(1987))  # Output: MCMLXXXVII
 # print(sol.intToRoman(3999))  # Output: MMMCMXCIX
+
+
+#  A subsequence is a series of characters that appear in the same relative order, but not necessarily contiguously. For example, the string "abc" is a subsequence of "ahbgdc", because the characters a, b, and c appear in the correct order, even though there are other characters in between.
+# def issubsequence(s,t):
+#     m = len(s)
+#     n = len(t)
+#     if s=='': return True
+#     elif m>n: return False
+#     j=0
+#     for i in range(n):
+#         if t[i] == s[j]:
+#             if j == m-1:
+#                 return True
+#             j+=1
+#     return False
+
+# print(issubsequence('abc','achhhjbc'))
