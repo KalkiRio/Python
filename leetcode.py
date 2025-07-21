@@ -273,16 +273,16 @@
 #             'M' : 1000,
 #         }
 #         sum = 0
-#         value = 0
+#         prev_value = 0
 #         for i in range(len(s)-1,-1,-1):
 #             if s[i] not in roman_map:
 #                 return "invalid roman number"
-#             if value > roman_map[s[i]]:
+#             if prev_value > roman_map[s[i]]:
 #                 sum -= roman_map[s[i]]
-#                 value = roman_map[s[i]]
+#                 prev_value = roman_map[s[i]]
 #             else:
 #                 sum += roman_map[s[i]]
-#                 value = roman_map[s[i]]
+#                 prev_value = roman_map[s[i]]
 #         return sum
 
 # sol = Solution()
