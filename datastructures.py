@@ -1,41 +1,7 @@
 # """linked list"""
-# class Node:
-#     def __init__(self,data):
-#         self.data=data
-#         self.next=None
-
-# class Linked_list:
-#     def __init__(self):
-#         self.head=None
-
-#     def append(self,data):
-#         new_node=Node(data)
-#         if not self.head:
-#             self.head=new_node
-#         else:
-#             current=self.head
-#             while current.next:
-#                 current=current.next
-#             current.next=new_node
-
-#     def display(self):
-#         current=self.head
-#         if not self.head:
-#             print("Empty linked list")
-#         else:
-#             while current:
-#                 print(f"{current.data} -> ", end ='')
-#                 current=current.next
-#             print("None")
-
-# node=Linked_list()
-# node.append(10)
-# node.append(20)
-# node.append(30)
-# node.display()
 
 class Node:
-    def __init__(self, data, next = None):
+    def __init__(self, data, next=None):
         self.data = data
         self.next = next
 
@@ -43,50 +9,62 @@ class LinkedList:
     def __init__(self):
         self.head = None
     
-    def append(self, data):
-        node = Node(data)
+    def insert(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+    
+    def length(self):
+        length = 0
+        current = self.head
+        while current:
+            length +=1
+            current = current.next
+        return length
+    
+    def insert_at(self, pos, data):
+        if pos == 0:
+            self.insert(data)
+            return
+        current = self.head
+        idx = 0
+        while current and idx < pos-1:
+            current=current.next
+            idx+=1
+            if not current:
+                return "index out of range"
+        new_node = Node(data)
+        new_node.next = current.next
+        current.next = new_node
+
+    def append(self,data):
         if not self.head:
-            self.head = node
+            self.head = Node(data)
         else:
             current = self.head
             while current.next:
                 current = current.next
-            current.next = node
+            current.next = Node(data)
     
-    def insert_at_beginning(self,data):
-        node = Node(data)
-        node.next = self.head
-        self.head = node
-            
     def display(self):
-        if self.head:
-            current = self.head
-            while current:
-                print(current.data,"-->",end=' ')
-                current=current.next
-            print("None")
-        else:
-            print('None')
-            
-    def reverse(self):
-        prev = None
         current = self.head
+        if not current:
+            return
         while current:
-            next_node = current.next
-            current.next = prev
-            prev = current
-            current = next_node
-        self.head = prev
-        
-l1 = LinkedList()
-# l1.display()
-l1.append(10)
-l1.append(20)
-# l1.display()
+            print(f"{current.data} -> ", end ='')
+            current = current.next
+        print("None")
 
-def reverse(node):
-    prev = None
+l1 = LinkedList()
+l1.append(1)
+l1.append(2)
+l1.append(3)
+l1.append(4)
+l1.display()
+
+def reverse_link(node):
     current = node.head
+    prev = None
     while current:
         next_node = current.next
         current.next = prev
@@ -94,20 +72,41 @@ def reverse(node):
         current = next_node
     node.head = prev
 
-# reverse(l1)
-# l1.display()
-# l1.reverse()
-# l1.display()
+reverse_link(l1)
+l1.display()
 
 def cycle(node):
-    p1 = node.head
-    p2 = node.head
-    while p2 and p2.next:
-        p1 = p1.next
-        p2 = p2.next.next
-        if p1 == p2:
+    slow = fast = node.head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
             return True
     return False
+
+print(cycle(l1))
+
+l1.insert(10)
+l1.insert_at(3,45)
+l1.display()
+reverse_link(l1)
+l1.display()
+
+def bubble_linked_sort(node):
+    if not node.head:
+        return
+    swapped = True
+    while swapped:
+        swapped = False
+        current = node.head
+        while current.next:
+            if current.data > current.next.data:
+                current.data, current.next.data = current.next.data, current.data
+                swapped = True
+            current = current.next
+
+bubble_linked_sort(l1)
+l1.display()
 
 def mid_value(node):
     p1 = node.head
@@ -117,11 +116,6 @@ def mid_value(node):
         p2 = p2.next.next
     return p1.data
 
-print(cycle(l1))
-l1.insert_at_beginning(99)
-l1.insert_at_beginning(78)
-l1.insert_at_beginning(50)
-l1.display()
 print(mid_value(l1))
 
 class Dnode():
